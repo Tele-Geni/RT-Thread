@@ -141,10 +141,6 @@
 /* end of Using USB legacy version */
 /* end of RT-Thread Components */
 
-/* RT-Thread Utestcases */
-
-/* end of RT-Thread Utestcases */
-
 /* RT-Thread online packages */
 
 /* IoT - internet of things */
@@ -342,5 +338,12 @@
 
 /* end of Board extended module Drivers */
 /* end of Hardware Drivers Config */
+
+/* hello module */
+
+#define RT_USING_HELLO
+#define RT_HELLO_NAME "hello"
+#define RT_HELLO_VALUE 8
+/* end of hello module */
 
 #endif

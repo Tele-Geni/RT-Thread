@@ -17,6 +17,7 @@
 - Documents
 - Notes
   - 00_RT-Thread开发环境搭建.md
+  - 01_RT-Thread ENV构建剪裁原理.md
 - Project
   - 00_spark
 - Tools

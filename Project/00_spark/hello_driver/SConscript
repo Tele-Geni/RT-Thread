@@ -1,0 +1,13 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+CPPPATH = [cwd]
+src = []
+
+if GetDepend(['RT_USING_HELLO']):
+        src += ['hello_driver.c']
+
+group = DefineGroup('Hello_Test', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')

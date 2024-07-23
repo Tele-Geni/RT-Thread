@@ -24,3 +24,20 @@ rsource "libraries/Kconfig"
 if !RT_USING_NANO
 rsource "board/Kconfig"
 endif
+
+menu "hello module"
+
+    config RT_USING_HELLO
+        bool "Enable hello module"
+        default y
+        help
+        this hello module only used for test
+
+    config RT_HELLO_NAME
+        string "hello name"
+        default "hello"
+
+    config RT_HELLO_VALUE
+        int "hello value"
+        default 8
+endmenu
