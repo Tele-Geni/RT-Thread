@@ -16,8 +16,9 @@
 
 - Documents
 - Notes
-  - 00_RT-Thread开发环境搭建.md
+  - 00_RT-Thread 开发环境搭建.md
   - 01_RT-Thread ENV构建剪裁原理.md
+  - 02_RT-Thread 内核 多线程+互斥+同步+邮箱+消息队列.md
 - Project
   - 00_spark
 - Tools
