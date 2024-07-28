@@ -15,11 +15,16 @@
 ## 目录组成
 
 - Documents
+  - RT-Thread 内核基础+线程.pdf
+  - RT-Thread IPC.pdf
+  - RT-Thread 驱动框架.pdf
 - Notes
   - 00_RT-Thread 开发环境搭建.md
   - 01_RT-Thread ENV构建剪裁原理.md
   - 02_RT-Thread 内核 多线程+互斥+同步+邮箱+消息队列.md
   - 03_RT-Thread 内核 启动流程+任务管理.md
+  - 04_RT-Thread 内核 IPC.md
+  - 02-04_RT-Thread 内核 操作系统+启动流程+内核机制.md
 - Project
   - 00_spark
 - Tools

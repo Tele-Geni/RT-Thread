@@ -265,6 +265,15 @@
 
 /* samples: kernel and components samples */
 
+#define PKG_USING_KERNEL_SAMPLES
+#define PKG_USING_KERNEL_SAMPLES_LATEST_VERSION
+#define PKG_USING_KERNEL_SAMPLES_EN
+#define KERNEL_SAMPLES_USING_THREAD
+#define KERNEL_SAMPLES_USING_SEMAPHORE
+#define KERNEL_SAMPLES_USING_MUTEX
+#define KERNEL_SAMPLES_USING_MAILBOX
+#define KERNEL_SAMPLES_USING_EVENT
+#define KERNEL_SAMPLES_USING_MESSAGEQUEUE
 /* end of samples: kernel and components samples */
 
 /* entertainment: terminal games and other interesting software packages */

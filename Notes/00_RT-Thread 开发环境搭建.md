@@ -43,7 +43,7 @@ git checkout XXX
 
 ![image-20240722132123715](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240722132123715.png)
 
->   备注：使用scons --dist可以在dist目录下构建出独立的工程，可拷贝至任意地方进行编写运行。
+>   备注：使用scons --dist可以在dist目录下构建出独立的工程，可拷贝至任意地方进行编写运行。vscode若出现`代码无法提示`现象，是c_cpp_properties.json出现了问题，通过scons --target=vsc重新生成，即可解决。
 
 ## 二、VSCode环境搭建
 
@@ -105,6 +105,8 @@ git checkout XXX
 ![image-20240722134001342](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240722134001342.png)
 
 按下第一个按钮程序全速运行，按下最后一个按钮断开调试。
+
+> 备注：vscode Ctrl+P 输入"> 反汇编"，可以进入反汇编调试界面
 
 ## 四、参考资源与安装包
 
