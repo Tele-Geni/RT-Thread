@@ -18,6 +18,7 @@
   - RT-Thread 内核基础+线程.pdf
   - RT-Thread IPC.pdf
   - RT-Thread 驱动框架.pdf
+  - 星火1号用户手册_V1.1.0.pdf
 - Notes
   - 00_RT-Thread 开发环境搭建.md
   - 01_RT-Thread ENV构建剪裁原理.md
@@ -25,7 +26,10 @@
   - 03_RT-Thread 内核 启动流程+任务管理.md
   - 04_RT-Thread 内核 IPC.md
   - 02-04_RT-Thread 内核 操作系统+启动流程+内核机制.md
+  - 05_RT-Thread 设备驱动开发.md
+  - 06_RT-Thread 软件包与组件.md
 - Project
   - 00_spark
+  - 01_spark
 - Tools
 
