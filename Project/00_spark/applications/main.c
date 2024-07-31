@@ -16,6 +16,7 @@
 #include <rtdevice.h>
 #endif /* RT_USING_NANO */
 #include "hello_driver.h"
+#include "drv_lcd.h"
 
 #define PIN_KEY0 GET_PIN(C, 0)
 
@@ -49,15 +50,19 @@ int main(void)
                             key_name_thread, RT_NULL,
                             THREAD_STACK_SIZE,
                             THREAD_PRIORITY, THREAD_TIMESLICE);
-    if (tid1 != RT_NULL)
-        rt_thread_startup(tid1);
+    // if (tid1 != RT_NULL)
+    //     rt_thread_startup(tid1);
 
     tid2 = rt_thread_create("led_thread",
                             led_name_thread, RT_NULL,
                             THREAD_STACK_SIZE,
                             THREAD_PRIORITY, THREAD_TIMESLICE);
-    if (tid2 != RT_NULL)
-        rt_thread_startup(tid2);
+    // if (tid2 != RT_NULL)
+    // rt_thread_startup(tid2);
+
+    lcd_clear(WHITE);
+    lcd_set_color(WHITE, BLACK);
+    lcd_show_string(10, 69, 16, "Hello RT-Thread!");
 
     while (1)
     {

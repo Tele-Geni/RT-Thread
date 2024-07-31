@@ -631,6 +631,22 @@ menu "On-chip Peripheral Drivers"
                         range 0 143
                         default 23
                 endif
+            menuconfig BSP_USING_I2C6
+                bool "Enable I2C6 BUS for RTduino(software simulation)"
+                default n
+                select RT_USING_I2C
+                select RT_USING_I2C_BITOPS
+                select RT_USING_PIN
+                if BSP_USING_I2C6
+                    config BSP_I2C6_SCL_PIN
+                        int "i2c6 scl pin number, PB6"
+                        range 0 143
+                        default 22
+                    config BSP_I2C6_SDA_PIN
+                        int "I2C6 sda pin number, PB7"
+                        range 0 143
+                        default 23
+                endif
         endif
 
     config BSP_USING_ONBOARD_PM
@@ -726,6 +742,10 @@ menu "On-chip Peripheral Drivers"
 endmenu
 
 menu "Board extended module Drivers"
+    
+    config BSP_USING_TEST
+        bool "Enable test driver"
+        default  n
 
     menuconfig BSP_USING_AT_ESP8266
         bool "Enable ESP8266(AT Command, COM3)"
