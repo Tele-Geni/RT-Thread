@@ -4,15 +4,6 @@
 #define LOG_LVL LOG_LVL_DBG
 #include <ulog.h>
 
-#define KEY_UP GET_PIN(C, 5)
-#define KEY_DOWN GET_PIN(C, 1)
-#define KEY_LEFT GET_PIN(C, 0)
-#define KEY_RIGHT GET_PIN(C, 4)
-
-#define THREAD_PRIORITY 25
-#define THREAD_STACK_SIZE 512
-#define THREAD_TIMESLICE 5
-
 static rt_thread_t tid = RT_NULL;
 
 void key_up_callback(void *args)
@@ -60,6 +51,7 @@ void button_init(void)
 void button_entry(void *parameter)
 {
     button_init();
+    LOG_I("button_init success!");
     while (1)
     {
         rt_thread_mdelay(1000);
@@ -70,11 +62,11 @@ int button_thread(void)
 {
     tid = rt_thread_create("button_thread",
                            button_entry, RT_NULL,
-                           THREAD_STACK_SIZE,
-                           THREAD_PRIORITY, THREAD_TIMESLICE);
+                           BUTTON_STACK_SIZE,
+                           BUTTON_PRIORITY, BUTTON_TIMESLICE);
 
     if (tid != RT_NULL)
         rt_thread_startup(tid);
     return 0;
 }
-MSH_CMD_EXPORT(button_thread, thread button_thread);
+MSH_CMD_EXPORT(button_thread, button_thread);
