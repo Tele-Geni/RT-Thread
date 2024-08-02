@@ -22,14 +22,20 @@
 - Notes
   - 00_RT-Thread 开发环境搭建.md
   - 01_RT-Thread ENV构建剪裁原理.md
-  - 02_RT-Thread 内核 多线程+互斥+同步+邮箱+消息队列.md
-  - 03_RT-Thread 内核 启动流程+任务管理.md
-  - 04_RT-Thread 内核 IPC.md
+    - ~~02_RT-Thread 内核 多线程+互斥+同步+邮箱+消息队列.md~~
+    - ~~03_RT-Thread 内核 启动流程+任务管理.md~~
+    - ~~04_RT-Thread 内核 IPC.md~~
   - 02-04_RT-Thread 内核 操作系统+启动流程+内核机制.md
-  - 05_RT-Thread 设备驱动开发.md
+    - ~~05_RT-Thread 设备驱动开发.md~~
+  - 05_RT-Thread 设备驱动开发 IO抽象层+总线层+驱动层+硬件层.md
   - 06_RT-Thread 软件包与组件.md
 - Project
-  - 00_spark
-  - 01_spark
+  - 00_spark——Day1-Day4环境搭建、内核基础、IPC、设备驱动学习
+  - 01_spark——Day5组件与软件包学习
+  - 02_spark——项目学习：拟采用lvgl+flexible_button+canopen+libmodbus搭建一个伺服电机模式控制及传感器采集显示系统
 - Tools
+
+
+
+
 
