@@ -38,6 +38,7 @@
 #define RT_USING_EVENT
 #define RT_USING_MAILBOX
 #define RT_USING_MESSAGEQUEUE
+#define RT_USING_SIGNALS
 /* end of Inter-Thread communication */
 
 /* Memory Management */
@@ -134,6 +135,21 @@
 
 /* Utilities */
 
+#define RT_USING_ULOG
+#define ULOG_OUTPUT_LVL_D
+#define ULOG_OUTPUT_LVL 7
+#define ULOG_USING_ISR_LOG
+#define ULOG_ASSERT_ENABLE
+#define ULOG_LINE_BUF_SIZE 128
+
+/* log format */
+
+#define ULOG_USING_COLOR
+#define ULOG_OUTPUT_TIME
+#define ULOG_OUTPUT_LEVEL
+#define ULOG_OUTPUT_TAG
+/* end of log format */
+#define ULOG_BACKEND_USING_CONSOLE
 /* end of Utilities */
 
 /* Using USB legacy version */
@@ -265,11 +281,34 @@
 
 /* samples: kernel and components samples */
 
+#define PKG_USING_KERNEL_SAMPLES
+#define PKG_USING_KERNEL_SAMPLES_LATEST_VERSION
+#define PKG_USING_KERNEL_SAMPLES_EN
+#define KERNEL_SAMPLES_USING_THREAD
+#define KERNEL_SAMPLES_USING_SEMAPHORE
+#define KERNEL_SAMPLES_USING_MUTEX
+#define KERNEL_SAMPLES_USING_MAILBOX
+#define KERNEL_SAMPLES_USING_EVENT
+#define KERNEL_SAMPLES_USING_MESSAGEQUEUE
+#define KERNEL_SAMPLES_USING_TIMER
+#define KERNEL_SAMPLES_USING_HEAP
+#define KERNEL_SAMPLES_USING_MEMHEAP
+#define KERNEL_SAMPLES_USING_MEMPOOL
+#define KERNEL_SAMPLES_USING_IDLEHOOK
+#define KERNEL_SAMPLES_USING_SIGNAL
+#define KERNEL_SAMPLES_USING_INTERRUPT
+#define KERNEL_SAMPLES_USING_PRI_INVERSION
+#define KERNEL_SAMPLES_USING_TIME_SLICE
+#define KERNEL_SAMPLES_USING_SCHEDULER_HOOK
+#define KERNEL_SAMPLES_USING_PRODUCER_CONSUMER
 /* end of samples: kernel and components samples */
 
 /* entertainment: terminal games and other interesting software packages */
 
 /* end of entertainment: terminal games and other interesting software packages */
+#define PKG_USING_FLEXIBLE_BUTTON
+#define PKG_USING_FLEXIBLE_BUTTON_DEMO
+#define PKG_USING_FLEXIBLE_BUTTON_LATEST
 /* end of miscellaneous packages */
 
 /* Arduino libraries */

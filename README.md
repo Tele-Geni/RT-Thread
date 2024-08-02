@@ -25,9 +25,9 @@
     - ~~02_RT-Thread 内核 多线程+互斥+同步+邮箱+消息队列.md~~
     - ~~03_RT-Thread 内核 启动流程+任务管理.md~~
     - ~~04_RT-Thread 内核 IPC.md~~
-  - 02-04_RT-Thread 内核 操作系统+启动流程+内核机制.md
+  - 02-04_RT-Thread 内核.md
     - ~~05_RT-Thread 设备驱动开发.md~~
-  - 05_RT-Thread 设备驱动开发 IO抽象层+总线层+驱动层+硬件层.md
+  - 05_RT-Thread 设备驱动开发.md
   - 06_RT-Thread 软件包与组件.md
 - Project
   - 00_spark——Day1-Day4环境搭建、内核基础、IPC、设备驱动学习

@@ -849,43 +849,6 @@ MSH_CMD_EXPORT(spi_send_then_recv_data, spi_send_then_recv_data);
 
 ![image-20240802185442735](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240802185442735.png)
 
+## 三、参考内容
 
-
-
-
-​			     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[官方文档设备驱动](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device)

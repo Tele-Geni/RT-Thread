@@ -147,7 +147,7 @@ int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
 #define SIGXCPU     24  /* exceeded CPU time limit */
 #define SIGXFSZ     25  /* exceeded file size limit */
 #define SIGVTALRM   26  /* virtual time alarm */
-/* #define SIGUSR1     25 */
+#define SIGUSR1     25
 /* #define SIGUSR2     26 */
 #define SIGRTMIN    27
 #define SIGRTMAX    31
