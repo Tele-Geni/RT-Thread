@@ -4,8 +4,6 @@
 #define LOG_LVL LOG_LVL_DBG
 #include <ulog.h>
 
-static rt_thread_t tid = RT_NULL;
-
 void led_init(void)
 {
     rt_pin_mode(LED_BULE, PIN_MODE_OUTPUT);
@@ -26,6 +24,7 @@ void led_entry(void *parameter)
 
 int led_thread(void)
 {
+    rt_thread_t tid = RT_NULL;
     tid = rt_thread_create("led_thread",
                            led_entry, RT_NULL,
                            LED_STACK_SIZE,

@@ -99,6 +99,7 @@
 #define RT_USING_I2C_BITOPS
 #define RT_USING_PWM
 #define RT_USING_PIN
+#define RT_USING_HWTIMER
 /* end of Device Drivers */
 
 /* C/C++ and POSIX layer */
@@ -310,6 +311,12 @@
 #define PKG_USING_FLEXIBLE_BUTTON
 #define PKG_USING_FLEXIBLE_BUTTON_DEMO
 #define PKG_USING_FLEXIBLE_BUTTON_LATEST
+#define PKG_USING_CANFESTIVAL
+#define CANFESTIVAL_CAN_DEVICE_NAME "can1"
+#define CANFESTIVAL_TIMER_DEVICE_NAME "timer14"
+#define CANFESTIVAL_RECV_THREAD_PRIO 9
+#define CANFESTIVAL_TIMER_THREAD_PRIO 10
+#define PKG_USING_CANFESTIVAL_LATEST_VERSION
 /* end of miscellaneous packages */
 
 /* Arduino libraries */
@@ -374,6 +381,8 @@
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART1
+#define BSP_USING_TIM
+#define BSP_USING_TIM14
 /* end of On-chip Peripheral Drivers */
 
 /* Board extended module Drivers */

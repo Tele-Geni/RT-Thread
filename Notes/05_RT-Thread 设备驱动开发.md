@@ -1163,10 +1163,37 @@ MSH_CMD_EXPORT(can_sample, can device sample);
 
 - **CANopen之canfestival协议栈移植**
 
+canfestival软件包依赖于can驱动和hwtimer驱动，can驱动前面已经测试通过，我们继续打开hwtimer驱动，这里选择TIM14只是因为`tim_config.h`中已有相关宏定义，你也可以复制修改实现TIM11和TIM13。
+
+![image-20240803154158742](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803154158742.png)
+
+![image-20240803154258493](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803154258493.png)
+
+然后开启canfestival软件包，采用注意can和hwtimer设备的名词，为上文配置的“can1”和“timer14”,优先级采取默认不做修改，pkgs --update下载，scons -j12编译，无报错。
+
+![image-20240803154650222](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803154650222.png)
+
+canfestival协议栈已经跑起来了，但是由于从机和主机没有构建`对象字典`所以出现问题write SDO failed但是CAN分析仪可以看到发出的协议。
+
+![image-20240803154005946](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803154005946.png)
+
+![image-20240803155445041](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803155445041.png)
+
+
+
 
 
 ## 三、参考内容
 
-[官方文档设备驱动](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device)
+[RT-Thread 设备驱动官方文档](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device)
 
-[RT-Thread 应用笔记 - STM32 CAN 通信双机](https://club.rt-thread.org/ask/article/f7386b76d640457c.html)
+[RT-Thread CAN双机通讯](https://club.rt-thread.org/ask/article/f7386b76d640457c.html)
+
+[RT-Thread CANFestival移植1](https://blog.csdn.net/lhy940827/article/details/140383587)
+
+[RT-Thread CANFestival移植2](https://club.rt-thread.org/ask/question/23bdba52dff15136.html)
+
+[RT-Thread CanOpenNode移植](https://club.rt-thread.org/ask/question/6ff99359f45c2368.html)
+
+
+
