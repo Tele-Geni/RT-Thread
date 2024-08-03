@@ -35,7 +35,7 @@ static rt_err_t can_rx_call(rt_device_t dev, rt_size_t size)
     return RT_EOK;
 }
 
-int can_init(void)
+static int can_init(void)
 {
     rt_err_t ret;
 

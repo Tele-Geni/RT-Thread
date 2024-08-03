@@ -4,7 +4,7 @@
 #define LOG_LVL LOG_LVL_DBG
 #include <ulog.h>
 
-void led_init(void)
+static void led_init(void)
 {
     rt_pin_mode(LED_BULE, PIN_MODE_OUTPUT);
     rt_pin_mode(LED_RED, PIN_MODE_OUTPUT);

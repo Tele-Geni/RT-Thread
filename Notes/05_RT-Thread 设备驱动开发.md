@@ -1179,9 +1179,13 @@ canfestival协议栈已经跑起来了，但是由于从机和主机没有构建
 
 ![image-20240803155445041](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803155445041.png)
 
+### LCD设备
 
+打开片上外设PWM和板载外设LCD
 
+![image-20240803223113251](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803223113251.png)
 
+简单测试，drv_lcd均正常使用，开始移植lvgl9.0。
 
 ## 三、参考内容
 

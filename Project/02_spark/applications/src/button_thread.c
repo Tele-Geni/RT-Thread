@@ -6,25 +6,25 @@
 
 static flex_button_t g_button[BUTTON_MAX];
 
-void key_up_callback(void *args)
+static void key_up_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
     LOG_I("event: %20s", enum_event_string[btn->event]);
 }
 
-void key_down_callback(void *args)
+static void key_down_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
     LOG_I("event: %20s", enum_event_string[btn->event]);
 }
 
-void key_left_callback(void *args)
+static void key_left_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
     LOG_I("event: %20s", enum_event_string[btn->event]);
 }
 
-void key_right_callback(void *args)
+static void key_right_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
     LOG_I("event: %20s", enum_event_string[btn->event]);
