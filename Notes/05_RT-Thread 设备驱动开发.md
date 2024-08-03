@@ -849,6 +849,324 @@ MSH_CMD_EXPORT(spi_send_then_recv_data, spi_send_then_recv_data);
 
 ![image-20240802185442735](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240802185442735.png)
 
+### CAN设备
+
+> 记录使用过程中遇到的错误以及解决方案。
+
+- **CAN 双机通信**
+
+打开板载外设CAN1
+
+![image-20240803141520887](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803141520887.png)
+
+编译报错，`drv_can.h`添加头文件`stm32f4xx_hal_can.h`
+
+![image-20240803141744330](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803141744330.png)
+
+![image-20240803141550931](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803141550931.png)
+
+继续编译，出现链接错误，修改`stm32f4xx_hal_conf.h`文件，定义`HAL_CAN_MODULE_ENABLED`
+
+![image-20240803141839718](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803141839718.png)
+
+![image-20240803142018253](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803142018253.png)
+
+编写can发送函数，运行出现init错误
+
+```c
+#include <rtthread.h>
+#include <drv_can.h>
+#define CAN_DEV_NAME "can1"
+static rt_device_t can_dev;
+
+void can_entry(void *parameter)
+{
+    struct rt_can_msg msg = {0};
+    rt_ssize_t size = 0;
+
+    can_dev = rt_device_find(CAN_DEV_NAME);
+    rt_device_open(can_dev, RT_DEVICE_FLAG_INT_TX | RT_DEVICE_FLAG_INT_RX);
+
+    msg.id = 0x78;
+    msg.ide = RT_CAN_STDID;
+    msg.rtr = RT_CAN_DTR;
+    msg.len = 8;
+
+    msg.data[0] = 0x00;
+    msg.data[1] = 0x11;
+    msg.data[2] = 0x22;
+    msg.data[3] = 0x33;
+    msg.data[4] = 0x44;
+    msg.data[5] = 0x55;
+    msg.data[6] = 0x66;
+    msg.data[7] = 0x77;
+    size = rt_device_write(can_dev, 0, &msg, sizeof(msg));
+
+    rt_kprintf("rt_device_write size : %d\n", size);
+
+    rt_thread_mdelay(2000);
+
+    rt_device_close(can_dev);
+}
+MSH_CMD_EXPORT(can_entry, can_entry);
+```
+
+![image-20240803142225243](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803142225243.png)
+
+调试发现是卡死在`HAL_CAN_Init()`函数等待应答处，查阅相关资料原因是要提前将CAN1的引脚状态配置好才可以正常初始化。
+
+```c
+...
+	/* Wait initialisation acknowledge */
+    while ((hcan->Instance->MSR & CAN_MSR_INAK) == 0U)
+    {
+        if ((HAL_GetTick() - tickstart) > CAN_TIMEOUT_VALUE)
+        {
+            /* Update error code */
+            hcan->ErrorCode |= HAL_CAN_ERROR_TIMEOUT;
+            /* Change CAN state */
+            hcan->State = HAL_CAN_STATE_ERROR;
+            return HAL_ERROR;
+        }
+    }
+...
+```
+
+故在`stm32f4xx_hal_msp.c`文件添加CAN1初始化代码，该部分可以用`stm32cubemx`生成拷贝复制。
+
+```c
+/**
+ * @brief CAN MSP Initialization
+ * This function configures the hardware resources used in this example
+ * @param hcan: CAN handle pointer
+ * @retval None
+ */
+void HAL_CAN_MspInit(CAN_HandleTypeDef *hcan)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if (hcan->Instance == CAN1)
+  {
+    /* USER CODE BEGIN CAN1_MspInit 0 */
+
+    /* USER CODE END CAN1_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_CAN1_CLK_ENABLE();
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    /**CAN1 GPIO Configuration
+    PB8     ------> CAN1_RX
+    PB9     ------> CAN1_TX
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    /* CAN1 interrupt Init */
+    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+    /* USER CODE BEGIN CAN1_MspInit 1 */
+
+    /* USER CODE END CAN1_MspInit 1 */
+  }
+}
+
+/**
+ * @brief CAN MSP De-Initialization
+ * This function freeze the hardware resources used in this example
+ * @param hcan: CAN handle pointer
+ * @retval None
+ */
+void HAL_CAN_MspDeInit(CAN_HandleTypeDef *hcan)
+{
+  if (hcan->Instance == CAN1)
+  {
+    /* USER CODE BEGIN CAN1_MspDeInit 0 */
+
+    /* USER CODE END CAN1_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_CAN1_CLK_DISABLE();
+
+    /**CAN1 GPIO Configuration
+    PB8     ------> CAN1_RX
+    PB9     ------> CAN1_TX
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8 | GPIO_PIN_9);
+
+    /* CAN1 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
+    HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+    /* USER CODE BEGIN CAN1_MspDeInit 1 */
+
+    /* USER CODE END CAN1_MspDeInit 1 */
+  }
+}
+```
+
+成功发送， 但不知道为何我明明发送的是标准帧13.5个字节，但实现显示我发送了16个字节(扩展帧)，切换为RT_CAN_EXTID也没有什么改变。
+
+![image-20240803143715413](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803143715413.png)
+
+![image-20240803143442900](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803143442900.png)
+
+可以发送以后，直接下载官网CAN设备应用示例进行验证，现象一样说明基本配置没有问题，随后便可以学习相关API进行自己的应用层开发使用。
+
+```c
+/*
+ * 程序清单：这是一个 CAN 设备使用例程
+ * 例程导出了 can_sample 命令到控制终端
+ * 命令调用格式：can_sample can1
+ * 命令解释：命令第二个参数是要使用的 CAN 设备名称，为空则使用默认的 CAN 设备
+ * 程序功能：通过 CAN 设备发送一帧，并创建一个线程接收数据然后打印输出。
+ */
+#include <rtthread.h>
+#include "rtdevice.h"
+
+#define CAN_DEV_NAME "can1" /* CAN 设备名称 */
+
+static struct rt_semaphore rx_sem; /* 用于接收消息的信号量 */
+static rt_device_t can_dev;        /* CAN 设备句柄 */
+
+/* 接收数据回调函数 */
+static rt_err_t can_rx_call(rt_device_t dev, rt_size_t size)
+{
+    /* CAN 接收到数据后产生中断，调用此回调函数，然后发送接收信号量 */
+    rt_sem_release(&rx_sem);
+
+    return RT_EOK;
+}
+
+static void can_rx_thread(void *parameter)
+{
+    int i;
+    rt_err_t res;
+    struct rt_can_msg rxmsg = {0};
+
+    /* 设置接收回调函数 */
+    rt_device_set_rx_indicate(can_dev, can_rx_call);
+
+#ifdef RT_CAN_USING_HDR
+    struct rt_can_filter_item items[5] =
+        {
+            RT_CAN_FILTER_ITEM_INIT(0x100, 0, 0, 0, 0x700, RT_NULL, RT_NULL), /* std,match ID:0x100~0x1ff，hdr 为 - 1，设置默认过滤表 */
+            RT_CAN_FILTER_ITEM_INIT(0x300, 0, 0, 0, 0x700, RT_NULL, RT_NULL), /* std,match ID:0x300~0x3ff，hdr 为 - 1 */
+            RT_CAN_FILTER_ITEM_INIT(0x211, 0, 0, 0, 0x7ff, RT_NULL, RT_NULL), /* std,match ID:0x211，hdr 为 - 1 */
+            RT_CAN_FILTER_STD_INIT(0x486, RT_NULL, RT_NULL),                  /* std,match ID:0x486，hdr 为 - 1 */
+            {
+                0x555,
+                0,
+                0,
+                0,
+                0x7ff,
+                7,
+            } /* std,match ID:0x555，hdr 为 7，指定设置 7 号过滤表 */
+        };
+    struct rt_can_filter_config cfg = {5, 1, items}; /* 一共有 5 个过滤表 */
+    /* 设置硬件过滤表 */
+    res = rt_device_control(can_dev, RT_CAN_CMD_SET_FILTER, &cfg);
+    RT_ASSERT(res == RT_EOK);
+#endif
+
+    while (1)
+    {
+        /* hdr 值为 - 1，表示直接从 uselist 链表读取数据 */
+        rxmsg.hdr_index = -1;
+        /* 阻塞等待接收信号量 */
+        rt_sem_take(&rx_sem, RT_WAITING_FOREVER);
+        /* 从 CAN 读取一帧数据 */
+        rt_device_read(can_dev, 0, &rxmsg, sizeof(rxmsg));
+        /* 打印数据 ID 及内容 */
+        rt_kprintf("ID:%x", rxmsg.id);
+        for (i = 0; i < 8; i++)
+        {
+            rt_kprintf("%2x", rxmsg.data[i]);
+        }
+
+        rt_kprintf("\n");
+    }
+}
+
+int can_sample(int argc, char *argv[])
+{
+    struct rt_can_msg msg = {0};
+    rt_err_t res;
+    rt_size_t size;
+    rt_thread_t thread;
+    char can_name[RT_NAME_MAX];
+
+    if (argc == 2)
+    {
+        rt_strncpy(can_name, argv[1], RT_NAME_MAX);
+    }
+    else
+    {
+        rt_strncpy(can_name, CAN_DEV_NAME, RT_NAME_MAX);
+    }
+    /* 查找 CAN 设备 */
+    can_dev = rt_device_find(can_name);
+    if (!can_dev)
+    {
+        rt_kprintf("find %s failed!\n", can_name);
+        return RT_ERROR;
+    }
+
+    /* 初始化 CAN 接收信号量 */
+    rt_sem_init(&rx_sem, "rx_sem", 0, RT_IPC_FLAG_FIFO);
+
+    /* 以中断接收及发送方式打开 CAN 设备 */
+    res = rt_device_open(can_dev, RT_DEVICE_FLAG_INT_TX | RT_DEVICE_FLAG_INT_RX);
+    RT_ASSERT(res == RT_EOK);
+    /* 创建数据接收线程 */
+    thread = rt_thread_create("can_rx", can_rx_thread, RT_NULL, 1024, 25, 10);
+    if (thread != RT_NULL)
+    {
+        rt_thread_startup(thread);
+    }
+    else
+    {
+        rt_kprintf("create can_rx thread failed!\n");
+    }
+
+    msg.id = 0x78;          /* ID 为 0x78 */
+    msg.ide = RT_CAN_STDID; /* 标准格式 */
+    msg.rtr = RT_CAN_DTR;   /* 数据帧 */
+    msg.len = 8;            /* 数据长度为 8 */
+    /* 待发送的 8 字节数据 */
+    msg.data[0] = 0x00;
+    msg.data[1] = 0x11;
+    msg.data[2] = 0x22;
+    msg.data[3] = 0x33;
+    msg.data[4] = 0x44;
+    msg.data[5] = 0x55;
+    msg.data[6] = 0x66;
+    msg.data[7] = 0x77;
+    /* 发送一帧 CAN 数据 */
+    size = rt_device_write(can_dev, 0, &msg, sizeof(msg));
+    if (size == 0)
+    {
+        rt_kprintf("can dev write data failed!\n");
+    }
+
+    return res;
+}
+/* 导出到 msh 命令列表中 */
+MSH_CMD_EXPORT(can_sample, can device sample);
+```
+
+发送接收功能正常，说明配置无错误
+
+![image-20240803150355116](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803150355116.png)
+
+- **CANopen之canfestival协议栈移植**
+
+
+
 ## 三、参考内容
 
 [官方文档设备驱动](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device)
+
+[RT-Thread 应用笔记 - STM32 CAN 通信双机](https://club.rt-thread.org/ask/article/f7386b76d640457c.html)

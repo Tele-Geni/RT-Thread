@@ -16,38 +16,40 @@
 #define __DRV_CAN_H__
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <board.h>
 #include <rtdevice.h>
+#include <stm32f4xx_hal_can.h>
 
-#define BS1SHIFT        16
-#define BS2SHIFT        20
-#define RRESCLSHIFT     0
-#define SJWSHIFT        24
-#define BS1MASK         ((0x0F) << BS1SHIFT )
-#define BS2MASK         ((0x07) << BS2SHIFT )
-#define RRESCLMASK      (0x3FF << RRESCLSHIFT )
-#define SJWMASK         (0x3 << SJWSHIFT )
+#define BS1SHIFT 16
+#define BS2SHIFT 20
+#define RRESCLSHIFT 0
+#define SJWSHIFT 24
+#define BS1MASK ((0x0F) << BS1SHIFT)
+#define BS2MASK ((0x07) << BS2SHIFT)
+#define RRESCLMASK (0x3FF << RRESCLSHIFT)
+#define SJWMASK (0x3 << SJWSHIFT)
 
-struct stm32_baud_rate_tab
-{
-    rt_uint32_t baud_rate;
-    rt_uint32_t config_data;
-};
-#define BAUD_DATA(TYPE,NO)       ((can_baud_rate_tab[NO].config_data & TYPE##MASK))
+    struct stm32_baud_rate_tab
+    {
+        rt_uint32_t baud_rate;
+        rt_uint32_t config_data;
+    };
+#define BAUD_DATA(TYPE, NO) ((can_baud_rate_tab[NO].config_data & TYPE##MASK))
 
-/* stm32 can device */
-struct stm32_can
-{
-    char *name;
-    CAN_HandleTypeDef CanHandle;
-    CAN_FilterTypeDef FilterConfig;
-    struct rt_can_device device;     /* inherit from can device */
-};
+    /* stm32 can device */
+    struct stm32_can
+    {
+        char *name;
+        CAN_HandleTypeDef CanHandle;
+        CAN_FilterTypeDef FilterConfig;
+        struct rt_can_device device; /* inherit from can device */
+    };
 
-int rt_hw_can_init(void);
+    int rt_hw_can_init(void);
 
 #ifdef __cplusplus
 }
