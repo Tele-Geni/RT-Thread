@@ -1181,11 +1181,38 @@ canfestival协议栈已经跑起来了，但是由于从机和主机没有构建
 
 ### LCD设备
 
-打开片上外设PWM和板载外设LCD
+> 记录使用过程中遇到的错误以及解决方案。
+
+- 打开片上外设驱动PWM和板载外设驱动LCD，简单测试，drv_lcd均正常使用
+
 
 ![image-20240803223113251](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240803223113251.png)
 
-简单测试，drv_lcd均正常使用，开始移植lvgl9.0。
+- 开始移植lvgl，搜索PKG_USING_LVGL宏，选择8.3.5版本，因为基本不用作改动，pkgs --update
+
+![image-20240804005310857](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240804005310857.png)
+
+直接编译lvgl软件包会报错，还需打开板载外设驱动`Enable LVGL for LCD`
+
+![image-20240804005531821](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240804005531821.png)
+
+可以发现lvgl占用内存非常高，直接就去了45％，也就是192*0.45=86.4K字节
+
+![image-20240804005805326](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240804005805326.png)
+
+运行出现断言错误
+
+![image-20240804010616808](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240804010616808.png)
+
+断言卡死在`packages\LVGL-v8.3.5\env_support\rt-thread\lv_rt_thread_port.c`文件，示例程序时间片tick不知道为什么给的是0，改为5后lvgl_demo正常启动
+
+![image-20240804011713765](https://gitee.com/qq1600845354/picgo_img/raw/main/笔记/image-20240804011713765.png)
+
+![image-20240804011707210](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240804011707210.png)
+
+![image-20240804012258000](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240804012258000.png)
+
+经测试LVGL-v8.3.11已解决这个问题，且无需改动，9.0版本变化较大，未能编译通过。
 
 ## 三、参考内容
 
