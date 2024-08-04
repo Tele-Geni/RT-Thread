@@ -19,6 +19,9 @@
   - RT-Thread IPC.pdf
   - RT-Thread 驱动框架.pdf
   - 星火1号用户手册_V1.1.0.pdf
+  - RT-Thread 软件包与组件.pdf
+  - RT-Thread BSP移植思路分享.pdf
+  - PR提交流程图.png
 - Notes
   - 00_RT-Thread 开发环境搭建.md
   - 01_RT-Thread ENV构建剪裁原理.md
@@ -29,10 +32,13 @@
     - ~~05_RT-Thread 设备驱动开发.md~~
   - 05_RT-Thread 设备驱动开发.md
   - 06_RT-Thread 软件包与组件.md
+  - 07_RT-Thread 设备驱动如何对接.md
 - Project
   - 00_spark——Day1-Day4环境搭建、内核基础、IPC、设备驱动学习
   - 01_spark——Day5组件与软件包学习
   - 02_spark——项目学习：拟采用lvgl+flexible_button+canopen+libmodbus搭建一个伺服电机模式控制及传感器采集显示系统
+  - 03_f103-blue-pill——驱动对接学习
+  - 04_ev_hc32f460——驱动对接学习
 - Tools
 
 
