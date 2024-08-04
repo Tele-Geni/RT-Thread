@@ -111,7 +111,7 @@ menu "Onboard Peripheral Drivers"
         config BSP_USING_LVGL_DEMO
             bool "Enable LVGL demo"
             select PKG_LVGL_USING_DEMOS
-            default y
+            default n
     endif
 
     config BSP_USING_SPI_FLASH

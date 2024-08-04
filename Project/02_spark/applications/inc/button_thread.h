@@ -16,7 +16,10 @@ typedef enum
     KEY_DOWN_1,
     KEY_LEFT_2,
     KEY_RIGHT_3,
-    BUTTON_MAX
+    /* virtual keystrokes */
+    BUTTON_MAX,
+    KEY_ENTER,
+    KEY_ESC
 } user_button_t;
 
 #define ENUM_TO_STR(e) (#e)

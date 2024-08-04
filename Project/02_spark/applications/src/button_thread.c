@@ -4,30 +4,70 @@
 #define LOG_LVL LOG_LVL_DBG
 #include <ulog.h>
 
+extern volatile int8_t g_cur_dummy_key;
+
 static flex_button_t g_button[BUTTON_MAX];
 
 static void key_up_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
-    LOG_I("event: %20s", enum_event_string[btn->event]);
+    LOG_D("event: %25s", enum_event_string[btn->event]);
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_CLICK:
+        g_cur_dummy_key = KEY_UP_0;
+        break;
+    default:
+        break;
+    }
 }
 
 static void key_down_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
-    LOG_I("event: %20s", enum_event_string[btn->event]);
+    LOG_D("event: %25s", enum_event_string[btn->event]);
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_CLICK:
+        g_cur_dummy_key = KEY_DOWN_1;
+        break;
+    case FLEX_BTN_PRESS_SHORT_START:
+        g_cur_dummy_key = KEY_ENTER; /* short press */
+        break;
+    case FLEX_BTN_PRESS_DOUBLE_CLICK:
+        g_cur_dummy_key = KEY_ESC; /* double click */
+        break;
+    default:
+        break;
+    }
 }
 
 static void key_left_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
-    LOG_I("event: %20s", enum_event_string[btn->event]);
+    LOG_D("event: %25s", enum_event_string[btn->event]);
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_CLICK:
+        g_cur_dummy_key = KEY_LEFT_2;
+        break;
+    default:
+        break;
+    }
 }
 
 static void key_right_callback(void *args)
 {
     flex_button_t *btn = (flex_button_t *)args;
-    LOG_I("event: %20s", enum_event_string[btn->event]);
+    LOG_D("event: %25s", enum_event_string[btn->event]);
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_CLICK:
+        g_cur_dummy_key = KEY_RIGHT_3;
+        break;
+    default:
+        break;
+    }
 }
 //...
 
@@ -92,12 +132,12 @@ static void button_init(void)
     for (int i = 0; i < BUTTON_MAX; i++)
     {
         g_button[i].id = i;
-        g_button[i].usr_button_read = common_btn_read;                  // 按键引脚电平读取函数
-        g_button[i].cb = common_btn_evt_cb;                             // 按键事件回调
-        g_button[i].pressed_logic_level = 0;                            // 按下时引脚电平
-        g_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500); // 单位为tick
-        g_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000);
-        g_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500);
+        g_button[i].usr_button_read = common_btn_read;                      // 按键引脚电平读取函数
+        g_button[i].cb = common_btn_evt_cb;                                 // 按键事件回调
+        g_button[i].pressed_logic_level = 0;                                // 按下时引脚电平
+        g_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500 / 2); // 单位为tick, 1/RT_TICK_PER_SECOND秒，默认为1ms
+        g_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000 / 2);
+        g_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500 / 2);
         flex_button_register(&g_button[i]);
     }
 }
@@ -125,4 +165,5 @@ int button_thread(void)
         rt_thread_startup(tid);
     return 0;
 }
-MSH_CMD_EXPORT(button_thread, button_thread);
+// MSH_CMD_EXPORT(button_thread, button_thread);
+INIT_DEVICE_EXPORT(button_thread);
