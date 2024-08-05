@@ -26,39 +26,73 @@ void setup_scr_PositionMode(lv_ui *ui)
 	//Write style for PositionMode, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->PositionMode, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes PositionMode_btn_1
-	ui->PositionMode_btn_1 = lv_btn_create(ui->PositionMode);
-	ui->PositionMode_btn_1_label = lv_label_create(ui->PositionMode_btn_1);
-	lv_label_set_text(ui->PositionMode_btn_1_label, "Back");
-	lv_label_set_long_mode(ui->PositionMode_btn_1_label, LV_LABEL_LONG_WRAP);
-	lv_obj_align(ui->PositionMode_btn_1_label, LV_ALIGN_CENTER, 0, 0);
-	lv_obj_set_style_pad_all(ui->PositionMode_btn_1, 0, LV_STATE_DEFAULT);
-	lv_obj_set_width(ui->PositionMode_btn_1_label, LV_PCT(100));
-	lv_obj_set_pos(ui->PositionMode_btn_1, 135, 190);
-	lv_obj_set_size(ui->PositionMode_btn_1, 90, 40);
+	//Write codes PositionMode_btn_back
+	ui->PositionMode_btn_back = lv_btn_create(ui->PositionMode);
+	ui->PositionMode_btn_back_label = lv_label_create(ui->PositionMode_btn_back);
+	lv_label_set_text(ui->PositionMode_btn_back_label, "Back");
+	lv_label_set_long_mode(ui->PositionMode_btn_back_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->PositionMode_btn_back_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->PositionMode_btn_back, 0, LV_STATE_DEFAULT);
+	lv_obj_set_width(ui->PositionMode_btn_back_label, LV_PCT(100));
+	lv_obj_set_pos(ui->PositionMode_btn_back, 135, 190);
+	lv_obj_set_size(ui->PositionMode_btn_back, 90, 40);
 
-	//Write style for PositionMode_btn_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->PositionMode_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->PositionMode_btn_1, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_grad_dir(ui->PositionMode_btn_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->PositionMode_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->PositionMode_btn_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->PositionMode_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->PositionMode_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->PositionMode_btn_1, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_opa(ui->PositionMode_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->PositionMode_btn_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for PositionMode_btn_back, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->PositionMode_btn_back, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->PositionMode_btn_back, lv_color_hex(0x928f77), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->PositionMode_btn_back, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->PositionMode_btn_back, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->PositionMode_btn_back, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->PositionMode_btn_back, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->PositionMode_btn_back, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->PositionMode_btn_back, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->PositionMode_btn_back, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->PositionMode_btn_back, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for PositionMode_btn_1, Part: LV_PART_MAIN, State: LV_STATE_FOCUSED.
-	lv_obj_set_style_bg_opa(ui->PositionMode_btn_1, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_bg_color(ui->PositionMode_btn_1, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_bg_grad_dir(ui->PositionMode_btn_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_border_width(ui->PositionMode_btn_1, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_radius(ui->PositionMode_btn_1, 5, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_shadow_width(ui->PositionMode_btn_1, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_text_color(ui->PositionMode_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_text_font(ui->PositionMode_btn_1, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_text_opa(ui->PositionMode_btn_1, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+	//Write style for PositionMode_btn_back, Part: LV_PART_MAIN, State: LV_STATE_FOCUSED.
+	lv_obj_set_style_bg_opa(ui->PositionMode_btn_back, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_color(ui->PositionMode_btn_back, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_grad_dir(ui->PositionMode_btn_back, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_border_width(ui->PositionMode_btn_back, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_radius(ui->PositionMode_btn_back, 5, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_shadow_width(ui->PositionMode_btn_back, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_color(ui->PositionMode_btn_back, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_font(ui->PositionMode_btn_back, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_opa(ui->PositionMode_btn_back, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+
+	//Write codes PositionMode_btn_run
+	ui->PositionMode_btn_run = lv_btn_create(ui->PositionMode);
+	ui->PositionMode_btn_run_label = lv_label_create(ui->PositionMode_btn_run);
+	lv_label_set_text(ui->PositionMode_btn_run_label, "Run");
+	lv_label_set_long_mode(ui->PositionMode_btn_run_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->PositionMode_btn_run_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->PositionMode_btn_run, 0, LV_STATE_DEFAULT);
+	lv_obj_set_width(ui->PositionMode_btn_run_label, LV_PCT(100));
+	lv_obj_set_pos(ui->PositionMode_btn_run, 15, 190);
+	lv_obj_set_size(ui->PositionMode_btn_run, 90, 40);
+
+	//Write style for PositionMode_btn_run, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->PositionMode_btn_run, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->PositionMode_btn_run, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->PositionMode_btn_run, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->PositionMode_btn_run, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->PositionMode_btn_run, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->PositionMode_btn_run, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->PositionMode_btn_run, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->PositionMode_btn_run, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->PositionMode_btn_run, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->PositionMode_btn_run, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for PositionMode_btn_run, Part: LV_PART_MAIN, State: LV_STATE_FOCUSED.
+	lv_obj_set_style_bg_opa(ui->PositionMode_btn_run, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_color(ui->PositionMode_btn_run, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_grad_dir(ui->PositionMode_btn_run, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_border_width(ui->PositionMode_btn_run, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_radius(ui->PositionMode_btn_run, 5, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_shadow_width(ui->PositionMode_btn_run, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_color(ui->PositionMode_btn_run, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_font(ui->PositionMode_btn_run, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_opa(ui->PositionMode_btn_run, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
 
 	//The custom code of PositionMode.
 	

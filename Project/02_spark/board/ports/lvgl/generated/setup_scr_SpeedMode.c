@@ -26,39 +26,73 @@ void setup_scr_SpeedMode(lv_ui *ui)
 	//Write style for SpeedMode, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->SpeedMode, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes SpeedMode_btn_1
-	ui->SpeedMode_btn_1 = lv_btn_create(ui->SpeedMode);
-	ui->SpeedMode_btn_1_label = lv_label_create(ui->SpeedMode_btn_1);
-	lv_label_set_text(ui->SpeedMode_btn_1_label, "Back");
-	lv_label_set_long_mode(ui->SpeedMode_btn_1_label, LV_LABEL_LONG_WRAP);
-	lv_obj_align(ui->SpeedMode_btn_1_label, LV_ALIGN_CENTER, 0, 0);
-	lv_obj_set_style_pad_all(ui->SpeedMode_btn_1, 0, LV_STATE_DEFAULT);
-	lv_obj_set_width(ui->SpeedMode_btn_1_label, LV_PCT(100));
-	lv_obj_set_pos(ui->SpeedMode_btn_1, 135, 190);
-	lv_obj_set_size(ui->SpeedMode_btn_1, 90, 40);
+	//Write codes SpeedMode_btn_back
+	ui->SpeedMode_btn_back = lv_btn_create(ui->SpeedMode);
+	ui->SpeedMode_btn_back_label = lv_label_create(ui->SpeedMode_btn_back);
+	lv_label_set_text(ui->SpeedMode_btn_back_label, "Back");
+	lv_label_set_long_mode(ui->SpeedMode_btn_back_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->SpeedMode_btn_back_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->SpeedMode_btn_back, 0, LV_STATE_DEFAULT);
+	lv_obj_set_width(ui->SpeedMode_btn_back_label, LV_PCT(100));
+	lv_obj_set_pos(ui->SpeedMode_btn_back, 135, 190);
+	lv_obj_set_size(ui->SpeedMode_btn_back, 90, 40);
 
-	//Write style for SpeedMode_btn_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-	lv_obj_set_style_bg_opa(ui->SpeedMode_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->SpeedMode_btn_1, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_grad_dir(ui->SpeedMode_btn_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_border_width(ui->SpeedMode_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_radius(ui->SpeedMode_btn_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_shadow_width(ui->SpeedMode_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_color(ui->SpeedMode_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_font(ui->SpeedMode_btn_1, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_opa(ui->SpeedMode_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_text_align(ui->SpeedMode_btn_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	//Write style for SpeedMode_btn_back, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->SpeedMode_btn_back, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->SpeedMode_btn_back, lv_color_hex(0x928f77), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->SpeedMode_btn_back, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->SpeedMode_btn_back, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->SpeedMode_btn_back, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->SpeedMode_btn_back, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->SpeedMode_btn_back, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->SpeedMode_btn_back, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->SpeedMode_btn_back, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->SpeedMode_btn_back, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style for SpeedMode_btn_1, Part: LV_PART_MAIN, State: LV_STATE_FOCUSED.
-	lv_obj_set_style_bg_opa(ui->SpeedMode_btn_1, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_bg_color(ui->SpeedMode_btn_1, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_bg_grad_dir(ui->SpeedMode_btn_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_border_width(ui->SpeedMode_btn_1, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_radius(ui->SpeedMode_btn_1, 5, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_shadow_width(ui->SpeedMode_btn_1, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_text_color(ui->SpeedMode_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_text_font(ui->SpeedMode_btn_1, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_FOCUSED);
-	lv_obj_set_style_text_opa(ui->SpeedMode_btn_1, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+	//Write style for SpeedMode_btn_back, Part: LV_PART_MAIN, State: LV_STATE_FOCUSED.
+	lv_obj_set_style_bg_opa(ui->SpeedMode_btn_back, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_color(ui->SpeedMode_btn_back, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_grad_dir(ui->SpeedMode_btn_back, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_border_width(ui->SpeedMode_btn_back, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_radius(ui->SpeedMode_btn_back, 5, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_shadow_width(ui->SpeedMode_btn_back, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_color(ui->SpeedMode_btn_back, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_font(ui->SpeedMode_btn_back, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_opa(ui->SpeedMode_btn_back, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+
+	//Write codes SpeedMode_btn_run
+	ui->SpeedMode_btn_run = lv_btn_create(ui->SpeedMode);
+	ui->SpeedMode_btn_run_label = lv_label_create(ui->SpeedMode_btn_run);
+	lv_label_set_text(ui->SpeedMode_btn_run_label, "Run");
+	lv_label_set_long_mode(ui->SpeedMode_btn_run_label, LV_LABEL_LONG_WRAP);
+	lv_obj_align(ui->SpeedMode_btn_run_label, LV_ALIGN_CENTER, 0, 0);
+	lv_obj_set_style_pad_all(ui->SpeedMode_btn_run, 0, LV_STATE_DEFAULT);
+	lv_obj_set_width(ui->SpeedMode_btn_run_label, LV_PCT(100));
+	lv_obj_set_pos(ui->SpeedMode_btn_run, 15, 190);
+	lv_obj_set_size(ui->SpeedMode_btn_run, 90, 40);
+
+	//Write style for SpeedMode_btn_run, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->SpeedMode_btn_run, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->SpeedMode_btn_run, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_grad_dir(ui->SpeedMode_btn_run, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->SpeedMode_btn_run, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->SpeedMode_btn_run, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->SpeedMode_btn_run, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->SpeedMode_btn_run, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->SpeedMode_btn_run, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_opa(ui->SpeedMode_btn_run, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->SpeedMode_btn_run, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for SpeedMode_btn_run, Part: LV_PART_MAIN, State: LV_STATE_FOCUSED.
+	lv_obj_set_style_bg_opa(ui->SpeedMode_btn_run, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_color(ui->SpeedMode_btn_run, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_bg_grad_dir(ui->SpeedMode_btn_run, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_border_width(ui->SpeedMode_btn_run, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_radius(ui->SpeedMode_btn_run, 5, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_shadow_width(ui->SpeedMode_btn_run, 0, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_color(ui->SpeedMode_btn_run, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_font(ui->SpeedMode_btn_run, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_FOCUSED);
+	lv_obj_set_style_text_opa(ui->SpeedMode_btn_run, 255, LV_PART_MAIN|LV_STATE_FOCUSED);
 
 	//The custom code of SpeedMode.
 	

@@ -39,7 +39,7 @@ void setup_scr_Operation(lv_ui *ui)
 
 	//Write style for Operation_btn_zero_mode, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->Operation_btn_zero_mode, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->Operation_btn_zero_mode, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Operation_btn_zero_mode, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_grad_dir(ui->Operation_btn_zero_mode, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->Operation_btn_zero_mode, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->Operation_btn_zero_mode, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -73,7 +73,7 @@ void setup_scr_Operation(lv_ui *ui)
 
 	//Write style for Operation_btn_position_mode, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->Operation_btn_position_mode, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->Operation_btn_position_mode, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Operation_btn_position_mode, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_grad_dir(ui->Operation_btn_position_mode, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->Operation_btn_position_mode, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->Operation_btn_position_mode, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -107,7 +107,7 @@ void setup_scr_Operation(lv_ui *ui)
 
 	//Write style for Operation_btn_speed_mdoe, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->Operation_btn_speed_mdoe, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->Operation_btn_speed_mdoe, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Operation_btn_speed_mdoe, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_grad_dir(ui->Operation_btn_speed_mdoe, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->Operation_btn_speed_mdoe, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->Operation_btn_speed_mdoe, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -141,7 +141,7 @@ void setup_scr_Operation(lv_ui *ui)
 
 	//Write style for Operation_btn_current_mode, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->Operation_btn_current_mode, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->Operation_btn_current_mode, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Operation_btn_current_mode, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_grad_dir(ui->Operation_btn_current_mode, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->Operation_btn_current_mode, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->Operation_btn_current_mode, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -175,7 +175,7 @@ void setup_scr_Operation(lv_ui *ui)
 
 	//Write style for Operation_btn_control_mode, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->Operation_btn_control_mode, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->Operation_btn_control_mode, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Operation_btn_control_mode, lv_color_hex(0x2FDA64), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_grad_dir(ui->Operation_btn_control_mode, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->Operation_btn_control_mode, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->Operation_btn_control_mode, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -209,7 +209,7 @@ void setup_scr_Operation(lv_ui *ui)
 
 	//Write style for Operation_btn_exit, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_bg_opa(ui->Operation_btn_exit, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_set_style_bg_color(ui->Operation_btn_exit, lv_color_hex(0xBEAF14), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Operation_btn_exit, lv_color_hex(0x928f77), LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_bg_grad_dir(ui->Operation_btn_exit, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_border_width(ui->Operation_btn_exit, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_radius(ui->Operation_btn_exit, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -234,7 +234,7 @@ void setup_scr_Operation(lv_ui *ui)
 	ui->Operation_label_1 = lv_label_create(ui->Operation);
 	lv_label_set_text(ui->Operation_label_1, "Motor Control System");
 	lv_label_set_long_mode(ui->Operation_label_1, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->Operation_label_1, 11, 12);
+	lv_obj_set_pos(ui->Operation_label_1, 11, 10);
 	lv_obj_set_size(ui->Operation_label_1, 220, 20);
 
 	//Write style for Operation_label_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -262,7 +262,7 @@ void setup_scr_Operation(lv_ui *ui)
 	lv_textarea_set_one_line(ui->Operation_ta_motor_id, false);
 	lv_textarea_set_accepted_chars(ui->Operation_ta_motor_id, "");
 	lv_textarea_set_max_length(ui->Operation_ta_motor_id, 32);
-	lv_obj_set_pos(ui->Operation_ta_motor_id, 93, 46);
+	lv_obj_set_pos(ui->Operation_ta_motor_id, 92, 41);
 	lv_obj_set_size(ui->Operation_ta_motor_id, 130, 30);
 
 	//Write style for Operation_ta_motor_id, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -294,7 +294,7 @@ void setup_scr_Operation(lv_ui *ui)
 	ui->Operation_label_3 = lv_label_create(ui->Operation);
 	lv_label_set_text(ui->Operation_label_3, "Device ID");
 	lv_label_set_long_mode(ui->Operation_label_3, LV_LABEL_LONG_WRAP);
-	lv_obj_set_pos(ui->Operation_label_3, 16, 48);
+	lv_obj_set_pos(ui->Operation_label_3, 16, 41.5);
 	lv_obj_set_size(ui->Operation_label_3, 76, 29);
 
 	//Write style for Operation_label_3, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.

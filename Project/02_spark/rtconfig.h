@@ -117,9 +117,7 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
-
 /* Interprocess Communication (IPC) */
-
 
 /* Socket is in the 'Network' category */
 
@@ -163,7 +161,6 @@
 /* RT-Thread online packages */
 
 /* IoT - internet of things */
-
 
 /* Wi-Fi */
 
@@ -329,7 +326,6 @@
 
 /* Arduino libraries */
 
-
 /* Projects and Demos */
 
 /* end of Projects and Demos */
@@ -384,7 +380,6 @@
 #define BSP_USING_ONBOARD_LCD
 #define BSP_USING_ONBOARD_LCD_PWM_BL
 #define BSP_USING_LVGL
-#define BSP_USING_LVGL_DEMO
 #define BSP_USING_CAN
 #define BSP_USING_CAN1
 /* end of Onboard Peripheral Drivers */

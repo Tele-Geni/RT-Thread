@@ -22,7 +22,7 @@ static void Home_btn_entry_event_handler (lv_event_t *e)
     switch (code) {
 	case LV_EVENT_CLICKED:
 	{
-		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.Home_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.Home_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
 		break;
 	}
     default:
@@ -54,7 +54,7 @@ static void Operation_btn_zero_mode_event_handler (lv_event_t *e)
     switch (code) {
 	case LV_EVENT_CLICKED:
 	{
-		ui_load_scr_animation(&guider_ui, &guider_ui.ZeroMode, guider_ui.ZeroMode_del, &guider_ui.Operation_del, setup_scr_ZeroMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		ui_load_scr_animation(&guider_ui, &guider_ui.ZeroMode, guider_ui.ZeroMode_del, &guider_ui.Operation_del, setup_scr_ZeroMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
 		break;
 	}
     default:
@@ -124,7 +124,7 @@ static void Operation_btn_exit_event_handler (lv_event_t *e)
     switch (code) {
 	case LV_EVENT_CLICKED:
 	{
-		ui_load_scr_animation(&guider_ui, &guider_ui.Home, guider_ui.Home_del, &guider_ui.Operation_del, setup_scr_Home, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		ui_load_scr_animation(&guider_ui, &guider_ui.Home, guider_ui.Home_del, &guider_ui.Operation_del, setup_scr_Home, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
 		break;
 	}
     default:
@@ -143,7 +143,7 @@ void events_init_Operation (lv_ui *ui)
 	lv_obj_add_event_cb(ui->Operation_btn_exit, Operation_btn_exit_event_handler, LV_EVENT_ALL, ui);
 }
 
-static void ZeroMode_btn_1_event_handler (lv_event_t *e)
+static void ZeroMode_btn_back_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     switch (code) {
@@ -159,10 +159,10 @@ static void ZeroMode_btn_1_event_handler (lv_event_t *e)
 
 void events_init_ZeroMode (lv_ui *ui)
 {
-	lv_obj_add_event_cb(ui->ZeroMode_btn_1, ZeroMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->ZeroMode_btn_back, ZeroMode_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
-static void PositionMode_btn_1_event_handler (lv_event_t *e)
+static void PositionMode_btn_back_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     switch (code) {
@@ -178,7 +178,7 @@ static void PositionMode_btn_1_event_handler (lv_event_t *e)
 
 void events_init_PositionMode (lv_ui *ui)
 {
-	lv_obj_add_event_cb(ui->PositionMode_btn_1, PositionMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->PositionMode_btn_back, PositionMode_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
 static void SpeedMode_event_handler (lv_event_t *e)
@@ -195,7 +195,7 @@ static void SpeedMode_event_handler (lv_event_t *e)
     }
 }
 
-static void SpeedMode_btn_1_event_handler (lv_event_t *e)
+static void SpeedMode_btn_back_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     switch (code) {
@@ -212,7 +212,7 @@ static void SpeedMode_btn_1_event_handler (lv_event_t *e)
 void events_init_SpeedMode (lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->SpeedMode, SpeedMode_event_handler, LV_EVENT_ALL, ui);
-	lv_obj_add_event_cb(ui->SpeedMode_btn_1, SpeedMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->SpeedMode_btn_back, SpeedMode_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
 static void CurrentMode_event_handler (lv_event_t *e)
@@ -229,7 +229,7 @@ static void CurrentMode_event_handler (lv_event_t *e)
     }
 }
 
-static void CurrentMode_btn_1_event_handler (lv_event_t *e)
+static void CurrentMode_btn_back_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     switch (code) {
@@ -246,7 +246,7 @@ static void CurrentMode_btn_1_event_handler (lv_event_t *e)
 void events_init_CurrentMode (lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->CurrentMode, CurrentMode_event_handler, LV_EVENT_ALL, ui);
-	lv_obj_add_event_cb(ui->CurrentMode_btn_1, CurrentMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->CurrentMode_btn_back, CurrentMode_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
 static void ControlMode_event_handler (lv_event_t *e)
@@ -263,7 +263,7 @@ static void ControlMode_event_handler (lv_event_t *e)
     }
 }
 
-static void ControlMode_btn_1_event_handler (lv_event_t *e)
+static void ControlMode_btn_back_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     switch (code) {
@@ -280,7 +280,7 @@ static void ControlMode_btn_1_event_handler (lv_event_t *e)
 void events_init_ControlMode (lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->ControlMode, ControlMode_event_handler, LV_EVENT_ALL, ui);
-	lv_obj_add_event_cb(ui->ControlMode_btn_1, ControlMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->ControlMode_btn_back, ControlMode_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
 

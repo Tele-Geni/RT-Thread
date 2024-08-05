@@ -135,9 +135,9 @@ static void button_init(void)
         g_button[i].usr_button_read = common_btn_read;                      // 按键引脚电平读取函数
         g_button[i].cb = common_btn_evt_cb;                                 // 按键事件回调
         g_button[i].pressed_logic_level = 0;                                // 按下时引脚电平
-        g_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500 / 2); // 单位为tick, 1/RT_TICK_PER_SECOND秒，默认为1ms
-        g_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000 / 2);
-        g_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500 / 2);
+        g_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500 / 4); // 单位为tick, 1/RT_TICK_PER_SECOND秒，默认为1ms
+        g_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000 / 4);
+        g_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500 / 4);
         flex_button_register(&g_button[i]);
     }
 }

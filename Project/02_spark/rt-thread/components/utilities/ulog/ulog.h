@@ -13,6 +13,7 @@
 
 #include <rtthread.h>
 #include "ulog_def.h"
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {

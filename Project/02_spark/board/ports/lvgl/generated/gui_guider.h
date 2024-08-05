@@ -23,6 +23,25 @@ typedef struct
 	lv_obj_t *Home_img_1;
 	lv_obj_t *Home_btn_entry;
 	lv_obj_t *Home_btn_entry_label;
+	lv_obj_t *Home_digital_clock_1;
+	lv_obj_t *Home_cont_1;
+	lv_obj_t *Home_spangroup_1;
+	lv_span_t *Home_spangroup_1_span;
+	lv_obj_t *Home_ta_temperature;
+	lv_obj_t *Home_ta_humidity;
+	lv_obj_t *Home_spangroup_2;
+	lv_span_t *Home_spangroup_2_span;
+	lv_obj_t *Home_spangroup_3;
+	lv_span_t *Home_spangroup_3_span;
+	lv_obj_t *Home_ta_acc_x;
+	lv_obj_t *Home_ta_acc_y;
+	lv_obj_t *Home_ta_acc_z;
+	lv_obj_t *Home_spangroup_4;
+	lv_span_t *Home_spangroup_4_span;
+	lv_obj_t *Home_led_1;
+	lv_obj_t *Home_ta_1;
+	lv_obj_t *Home_ta_2;
+	lv_obj_t *Home_ta_3;
 	lv_obj_t *Operation;
 	bool Operation_del;
 	lv_obj_t *Operation_btn_zero_mode;
@@ -42,24 +61,34 @@ typedef struct
 	lv_obj_t *Operation_label_3;
 	lv_obj_t *ZeroMode;
 	bool ZeroMode_del;
-	lv_obj_t *ZeroMode_btn_1;
-	lv_obj_t *ZeroMode_btn_1_label;
+	lv_obj_t *ZeroMode_btn_back;
+	lv_obj_t *ZeroMode_btn_back_label;
+	lv_obj_t *ZeroMode_btn_run;
+	lv_obj_t *ZeroMode_btn_run_label;
 	lv_obj_t *PositionMode;
 	bool PositionMode_del;
-	lv_obj_t *PositionMode_btn_1;
-	lv_obj_t *PositionMode_btn_1_label;
+	lv_obj_t *PositionMode_btn_back;
+	lv_obj_t *PositionMode_btn_back_label;
+	lv_obj_t *PositionMode_btn_run;
+	lv_obj_t *PositionMode_btn_run_label;
 	lv_obj_t *SpeedMode;
 	bool SpeedMode_del;
-	lv_obj_t *SpeedMode_btn_1;
-	lv_obj_t *SpeedMode_btn_1_label;
+	lv_obj_t *SpeedMode_btn_back;
+	lv_obj_t *SpeedMode_btn_back_label;
+	lv_obj_t *SpeedMode_btn_run;
+	lv_obj_t *SpeedMode_btn_run_label;
 	lv_obj_t *CurrentMode;
 	bool CurrentMode_del;
-	lv_obj_t *CurrentMode_btn_1;
-	lv_obj_t *CurrentMode_btn_1_label;
+	lv_obj_t *CurrentMode_btn_back;
+	lv_obj_t *CurrentMode_btn_back_label;
+	lv_obj_t *CurrentMode_btn_run;
+	lv_obj_t *CurrentMode_btn_run_label;
 	lv_obj_t *ControlMode;
 	bool ControlMode_del;
-	lv_obj_t *ControlMode_btn_1;
-	lv_obj_t *ControlMode_btn_1_label;
+	lv_obj_t *ControlMode_btn_back;
+	lv_obj_t *ControlMode_btn_back_label;
+	lv_obj_t *ControlMode_btn_run;
+	lv_obj_t *ControlMode_btn_run_label;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -93,6 +122,7 @@ LV_IMG_DECLARE(_home_alpha_240x240);
 
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
 LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_16)
 LV_FONT_DECLARE(lv_font_arial_18)
 LV_FONT_DECLARE(lv_font_arial_16)
 
