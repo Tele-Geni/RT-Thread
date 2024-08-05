@@ -12,9 +12,10 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <board.h>
+#include <ulog.h>
 
 int main(void)
 {
-    // rt_kprintf("Hello RT-Thread!\n");
+    ulog_global_filter_lvl_set(LOG_LVL_INFO);
     return 0;
 }

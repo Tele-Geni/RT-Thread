@@ -10,9 +10,11 @@
 #include <lv_conf.h>
 #include "lv_port_indev.h"
 #include <lvgl.h>
-// #include <rtdevice.h>
-// #include <board.h>
-// #include <stdbool.h>
+#include <button_thread.h>
+
+#define LOG_TAG "lvgl.indev"
+#define LOG_LVL LOG_LVL_DBG
+#include <ulog.h>
 
 static void keypad_init(void);
 static void keypad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data);
@@ -44,30 +46,37 @@ static void keypad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
 {
     static uint32_t last_key = 0;
     uint32_t act_key = keypad_get_key();
-    if (act_key != 0)
+    if (act_key != -1)
     {
         data->state = LV_INDEV_STATE_PR;
         switch (act_key)
         {
-        case 0:
+        case KEY_UP_0:
+            LOG_D("recv act_key value :        %d!\n", act_key);
             act_key = LV_KEY_UP;
             break;
-        case 1:
+        case KEY_DOWN_1:
+            LOG_D("recv act_key value :        %d!\n", act_key);
             act_key = LV_KEY_DOWN;
             break;
-        case 2:
+        case KEY_LEFT_2:
+            LOG_D("recv act_key value :        %d!\n", act_key);
             act_key = LV_KEY_LEFT;
             break;
-        case 3:
+        case KEY_RIGHT_3:
+            LOG_D("recv act_key value :        %d!\n", act_key);
             act_key = LV_KEY_RIGHT;
             break;
-        case 4:
+        case BUTTON_MAX:
+            LOG_D("recv act_key value :        %d!\n", act_key);
             break; /* BUTTON_MAX */
-        case 5:
-            act_key = LV_KEY_ENTER; /* short press */
+        case KEY_ENTER:
+            LOG_D("recv act_key value :        %d!\n", act_key);
+            act_key = LV_KEY_ENTER; /* double click to entry */
             break;
-        case 6:
-            act_key = LV_KEY_ESC; /* double click */
+        case KEY_ESC:
+            LOG_D("recv act_key value :        %d!\n", act_key);
+            act_key = LV_KEY_ESC; /* short press to exit/back */
             break;
         default:
             break;
@@ -84,8 +93,6 @@ static void keypad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
 static uint32_t keypad_get_key(void)
 {
     int8_t temp = g_cur_dummy_key;
-    if (g_cur_dummy_key != -1)
-        rt_kprintf("g_cur_dummy_key: %d!\n", g_cur_dummy_key);
     g_cur_dummy_key = -1;
     return temp;
 }

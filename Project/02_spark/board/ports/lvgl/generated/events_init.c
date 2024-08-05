@@ -16,6 +16,273 @@
 #endif
 
 
+static void Home_btn_entry_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.Home_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_Home (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->Home_btn_entry, Home_btn_entry_event_handler, LV_EVENT_ALL, ui);
+}
+
+static void Operation_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void Operation_btn_zero_mode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.ZeroMode, guider_ui.ZeroMode_del, &guider_ui.Operation_del, setup_scr_ZeroMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void Operation_btn_position_mode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.PositionMode, guider_ui.PositionMode_del, &guider_ui.Operation_del, setup_scr_PositionMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void Operation_btn_speed_mdoe_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.SpeedMode, guider_ui.SpeedMode_del, &guider_ui.Operation_del, setup_scr_SpeedMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void Operation_btn_current_mode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.CurrentMode, guider_ui.CurrentMode_del, &guider_ui.Operation_del, setup_scr_CurrentMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void Operation_btn_control_mode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.ControlMode, guider_ui.ControlMode_del, &guider_ui.Operation_del, setup_scr_ControlMode, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void Operation_btn_exit_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Home, guider_ui.Home_del, &guider_ui.Operation_del, setup_scr_Home, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_Operation (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->Operation, Operation_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Operation_btn_zero_mode, Operation_btn_zero_mode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Operation_btn_position_mode, Operation_btn_position_mode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Operation_btn_speed_mdoe, Operation_btn_speed_mdoe_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Operation_btn_current_mode, Operation_btn_current_mode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Operation_btn_control_mode, Operation_btn_control_mode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->Operation_btn_exit, Operation_btn_exit_event_handler, LV_EVENT_ALL, ui);
+}
+
+static void ZeroMode_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.ZeroMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_ZeroMode (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->ZeroMode_btn_1, ZeroMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+}
+
+static void PositionMode_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.PositionMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_PositionMode (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->PositionMode_btn_1, PositionMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+}
+
+static void SpeedMode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.SpeedMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void SpeedMode_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.SpeedMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_SpeedMode (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->SpeedMode, SpeedMode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->SpeedMode_btn_1, SpeedMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+}
+
+static void CurrentMode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.CurrentMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void CurrentMode_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.CurrentMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_CurrentMode (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->CurrentMode, CurrentMode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->CurrentMode_btn_1, CurrentMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+}
+
+static void ControlMode_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.ControlMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, false, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+static void ControlMode_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+	case LV_EVENT_CLICKED:
+	{
+		ui_load_scr_animation(&guider_ui, &guider_ui.Operation, guider_ui.Operation_del, &guider_ui.ControlMode_del, setup_scr_Operation, LV_SCR_LOAD_ANIM_NONE, 200, 200, true, true);
+		break;
+	}
+    default:
+        break;
+    }
+}
+
+void events_init_ControlMode (lv_ui *ui)
+{
+	lv_obj_add_event_cb(ui->ControlMode, ControlMode_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->ControlMode_btn_1, ControlMode_btn_1_event_handler, LV_EVENT_ALL, ui);
+}
+
 
 void events_init(lv_ui *ui)
 {

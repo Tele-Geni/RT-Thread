@@ -31,11 +31,11 @@ static void key_down_callback(void *args)
     case FLEX_BTN_PRESS_CLICK:
         g_cur_dummy_key = KEY_DOWN_1;
         break;
-    case FLEX_BTN_PRESS_SHORT_START:
-        g_cur_dummy_key = KEY_ENTER; /* short press */
-        break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-        g_cur_dummy_key = KEY_ESC; /* double click */
+        g_cur_dummy_key = KEY_ENTER; /* double click to entry */
+        break;
+    case FLEX_BTN_PRESS_SHORT_START:
+        g_cur_dummy_key = KEY_ESC; /* short press to exit/back */
         break;
     default:
         break;

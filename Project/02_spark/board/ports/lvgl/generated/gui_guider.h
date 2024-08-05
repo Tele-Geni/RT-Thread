@@ -18,12 +18,48 @@ extern "C" {
 typedef struct
 {
   
-	lv_obj_t *screen;
-	bool screen_del;
-	lv_obj_t *screen_sw_up;
-	lv_obj_t *screen_sw_left;
-	lv_obj_t *screen_sw_down;
-	lv_obj_t *screen_sw_right;
+	lv_obj_t *Home;
+	bool Home_del;
+	lv_obj_t *Home_img_1;
+	lv_obj_t *Home_btn_entry;
+	lv_obj_t *Home_btn_entry_label;
+	lv_obj_t *Operation;
+	bool Operation_del;
+	lv_obj_t *Operation_btn_zero_mode;
+	lv_obj_t *Operation_btn_zero_mode_label;
+	lv_obj_t *Operation_btn_position_mode;
+	lv_obj_t *Operation_btn_position_mode_label;
+	lv_obj_t *Operation_btn_speed_mdoe;
+	lv_obj_t *Operation_btn_speed_mdoe_label;
+	lv_obj_t *Operation_btn_current_mode;
+	lv_obj_t *Operation_btn_current_mode_label;
+	lv_obj_t *Operation_btn_control_mode;
+	lv_obj_t *Operation_btn_control_mode_label;
+	lv_obj_t *Operation_btn_exit;
+	lv_obj_t *Operation_btn_exit_label;
+	lv_obj_t *Operation_label_1;
+	lv_obj_t *Operation_ta_motor_id;
+	lv_obj_t *Operation_label_3;
+	lv_obj_t *ZeroMode;
+	bool ZeroMode_del;
+	lv_obj_t *ZeroMode_btn_1;
+	lv_obj_t *ZeroMode_btn_1_label;
+	lv_obj_t *PositionMode;
+	bool PositionMode_del;
+	lv_obj_t *PositionMode_btn_1;
+	lv_obj_t *PositionMode_btn_1_label;
+	lv_obj_t *SpeedMode;
+	bool SpeedMode_del;
+	lv_obj_t *SpeedMode_btn_1;
+	lv_obj_t *SpeedMode_btn_1_label;
+	lv_obj_t *CurrentMode;
+	bool CurrentMode_del;
+	lv_obj_t *CurrentMode_btn_1;
+	lv_obj_t *CurrentMode_btn_1_label;
+	lv_obj_t *ControlMode;
+	bool ControlMode_del;
+	lv_obj_t *ControlMode_btn_1;
+	lv_obj_t *ControlMode_btn_1_label;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -46,8 +82,19 @@ void setup_ui(lv_ui *ui);
 extern lv_ui guider_ui;
 
 
-void setup_scr_screen(lv_ui *ui);
+void setup_scr_Home(lv_ui *ui);
+void setup_scr_Operation(lv_ui *ui);
+void setup_scr_ZeroMode(lv_ui *ui);
+void setup_scr_PositionMode(lv_ui *ui);
+void setup_scr_SpeedMode(lv_ui *ui);
+void setup_scr_CurrentMode(lv_ui *ui);
+void setup_scr_ControlMode(lv_ui *ui);
+LV_IMG_DECLARE(_home_alpha_240x240);
 
+LV_FONT_DECLARE(lv_font_montserratMedium_16)
+LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_arial_18)
+LV_FONT_DECLARE(lv_font_arial_16)
 
 
 #ifdef __cplusplus

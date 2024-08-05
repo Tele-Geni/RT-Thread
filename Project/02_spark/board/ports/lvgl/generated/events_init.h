@@ -18,6 +18,13 @@ extern "C" {
 
 void events_init(lv_ui *ui);
 
+void events_init_Home(lv_ui *ui);
+void events_init_Operation(lv_ui *ui);
+void events_init_ZeroMode(lv_ui *ui);
+void events_init_PositionMode(lv_ui *ui);
+void events_init_SpeedMode(lv_ui *ui);
+void events_init_CurrentMode(lv_ui *ui);
+void events_init_ControlMode(lv_ui *ui);
 
 #ifdef __cplusplus
 }

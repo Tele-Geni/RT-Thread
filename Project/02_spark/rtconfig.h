@@ -152,6 +152,7 @@
 #define ULOG_OUTPUT_TAG
 /* end of log format */
 #define ULOG_BACKEND_USING_CONSOLE
+#define ULOG_USING_FILTER
 /* end of Utilities */
 
 /* Using USB legacy version */
