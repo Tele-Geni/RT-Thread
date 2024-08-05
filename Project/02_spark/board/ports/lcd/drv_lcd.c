@@ -1287,7 +1287,7 @@ int drv_lcd_init(void)
     lcddev.id <<= 8;
     lcddev.id |= LCD_RD_DATA8();
 
-    LOG_I(" LCD ID:%x", lcddev.id); // 打印LCD ID
+    LOG_D(" LCD ID:%x", lcddev.id); // 打印LCD ID
     if (lcddev.id == 0X81b3)        // st7789v3
     {
         //************* Start Initial Sequence **********//

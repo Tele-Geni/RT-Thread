@@ -5,7 +5,7 @@
 #include <drv_lcd.h>
 #include <disp_image.h>
 
-#define LCD_PRIORITY RT_THREAD_PRIORITY_MAX - 22
+#define LCD_PRIORITY RT_THREAD_PRIORITY_MAX - 11
 #define LCD_STACK_SIZE (128 * 12)
 #define LCD_TIMESLICE 10
 

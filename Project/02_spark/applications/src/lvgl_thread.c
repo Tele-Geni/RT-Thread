@@ -8,6 +8,7 @@ lv_ui guider_ui;
 
 PageState_t g_current_page = HOME_PAGE;
 rt_mutex_t g_page_state_mutex = RT_NULL;
+rt_mutex_t g_fresh_mutex = RT_NULL;
 
 extern lv_group_t *keypad_group; // default group
 
@@ -130,11 +131,12 @@ End:
     LOG_D("g_current_page current: %20s\n", page_state_string[g_current_page]);
 }
 
+/* lvgl's lv_user_gui_init function that where `packages\LVGL-v8.3.11\env_support\rt-thread\lv_rt_thread_port.c` will be replace at here */
 void lv_user_gui_init(void)
 {
-    /* lvgl_thread where `packages\LVGL-v8.3.11\env_support\rt-thread\lv_rt_thread_port.c` will be replace at here */
-    lv_obj_clean(lv_scr_act());
-    setup_ui(&guider_ui);
-    custom_init(&guider_ui);
+    lv_obj_clean(lv_scr_act()); // 清屏
+    setup_ui(&guider_ui);       // 布局
+    custom_init(&guider_ui);    // 自定义
     g_page_state_mutex = rt_mutex_create("page_state", RT_IPC_FLAG_PRIO);
+    g_fresh_mutex = rt_mutex_create("data_fresh", RT_IPC_FLAG_PRIO);
 }

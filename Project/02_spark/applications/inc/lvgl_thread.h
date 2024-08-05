@@ -1,10 +1,15 @@
 #ifndef __LVGL_THREAD_H_
 #define __LVGL_THREAD_H_
 
+#include <rtthread.h>
 #include <lvgl.h>
 #include "gui_guider.h"
 #include "custom.h"
 #include "button_thread.h"
+
+#ifndef ENUM_TO_STR
+#define ENUM_TO_STR(e) (#e)
+#endif
 
 typedef enum
 {
@@ -29,5 +34,7 @@ static char *page_state_string[] = {
 };
 
 void handle_key_input(uint32_t act_key);
+
+/* lvgl_thread prio 21 */
 
 #endif /* __LVGL_THREAD_H_ */

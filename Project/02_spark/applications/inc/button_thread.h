@@ -39,7 +39,7 @@ static char *enum_event_string[] = {
     ENUM_TO_STR(FLEX_BTN_PRESS_NONE),
 };
 
-#define BUTTON_PRIORITY RT_THREAD_PRIORITY_MAX - 22
+#define BUTTON_PRIORITY RT_THREAD_PRIORITY_MAX - 15
 #define BUTTON_STACK_SIZE (128 * 8)
 #define BUTTON_TIMESLICE 10
 

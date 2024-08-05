@@ -27,21 +27,27 @@ typedef struct
 	lv_obj_t *Home_cont_1;
 	lv_obj_t *Home_spangroup_1;
 	lv_span_t *Home_spangroup_1_span;
-	lv_obj_t *Home_ta_temperature;
-	lv_obj_t *Home_ta_humidity;
 	lv_obj_t *Home_spangroup_2;
 	lv_span_t *Home_spangroup_2_span;
 	lv_obj_t *Home_spangroup_3;
 	lv_span_t *Home_spangroup_3_span;
-	lv_obj_t *Home_ta_acc_x;
-	lv_obj_t *Home_ta_acc_y;
-	lv_obj_t *Home_ta_acc_z;
 	lv_obj_t *Home_spangroup_4;
 	lv_span_t *Home_spangroup_4_span;
 	lv_obj_t *Home_led_1;
-	lv_obj_t *Home_ta_1;
-	lv_obj_t *Home_ta_2;
-	lv_obj_t *Home_ta_3;
+	lv_obj_t *Home_label_temp;
+	lv_obj_t *Home_label_humi;
+	lv_obj_t *Home_label_1;
+	lv_obj_t *Home_label_2;
+	lv_obj_t *Home_label_acc_x;
+	lv_obj_t *Home_label_acc_y;
+	lv_obj_t *Home_label_acc_z;
+	lv_obj_t *Home_label_gyro_x;
+	lv_obj_t *Home_label_gyro_y;
+	lv_obj_t *Home_label_gyro_z;
+	lv_obj_t *Home_label_9;
+	lv_obj_t *Home_label_10;
+	lv_obj_t *Home_label_11;
+	lv_obj_t *Home_line_1;
 	lv_obj_t *Operation;
 	bool Operation_del;
 	lv_obj_t *Operation_btn_zero_mode;
@@ -123,6 +129,10 @@ LV_IMG_DECLARE(_home_alpha_240x240);
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
 LV_FONT_DECLARE(lv_font_montserratMedium_12)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_16)
+LV_FONT_DECLARE(lv_font_montserratMedium_10)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_14)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_12)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_11)
 LV_FONT_DECLARE(lv_font_arial_18)
 LV_FONT_DECLARE(lv_font_arial_16)
 
