@@ -24,11 +24,9 @@ void led_entry(void *parameter)
         // LED_BLUE_RED_BLINK();
         LED_RED_ON();
         rt_sem_release(g_led_sem);
-        lv_event_send(guider_ui.Home_led_1, LV_EVENT_VALUE_CHANGED, RT_NULL);
         rt_thread_mdelay(500);
         LED_RED_OFF();
         rt_sem_release(g_led_sem);
-        lv_event_send(guider_ui.Home_led_1, LV_EVENT_VALUE_CHANGED, RT_NULL);
         rt_thread_mdelay(500);
     }
 }

@@ -51,7 +51,6 @@ void icm20608_entry(void *parameter)
             LOG_E("The sensor does not work");
             break;
         }
-
         /* gyros_x 、gyros_y 、gyros_z */
         ret = icm20608_get_gyro(g_dev, &icm_buf[3], &icm_buf[4], &icm_buf[5]);
         if (ret == RT_EOK)
@@ -62,17 +61,9 @@ void icm20608_entry(void *parameter)
             break;
         }
         ret = rt_mq_send_wait(g_icm20608_mq, icm_buf, sizeof(icm_buf), RT_WAITING_FOREVER);
-        if (RT_EOK == ret)
-        {
-            extern lv_ui guider_ui;
-            lv_event_send(guider_ui.Home_label_acc_x, LV_EVENT_VALUE_CHANGED, RT_NULL);
-            // lv_event_send(guider_ui.Home_label_acc_y, LV_EVENT_VALUE_CHANGED, RT_NULL);
-            // lv_event_send(guider_ui.Home_label_acc_z, LV_EVENT_VALUE_CHANGED, RT_NULL);
-            // lv_event_send(guider_ui.Home_label_gyro_x, LV_EVENT_VALUE_CHANGED, RT_NULL);
-            // lv_event_send(guider_ui.Home_label_gyro_y, LV_EVENT_VALUE_CHANGED, RT_NULL);
-            // lv_event_send(guider_ui.Home_label_gyro_z, LV_EVENT_VALUE_CHANGED, RT_NULL);
-        }
-        rt_thread_mdelay(1000);
+        if (ret != RT_EOK)
+            LOG_W("rt_mq_send_wait failed!");
+        rt_thread_mdelay(800); // 队伍满了，生产者可以等，但是不能让消费者等
     }
 }
 

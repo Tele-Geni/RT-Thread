@@ -6,6 +6,7 @@
 #include "gui_guider.h"
 #include "custom.h"
 #include "button_thread.h"
+#include <stdlib.h>
 
 #ifndef ENUM_TO_STR
 #define ENUM_TO_STR(e) (#e)

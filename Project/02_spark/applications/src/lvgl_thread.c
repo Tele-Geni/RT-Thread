@@ -6,11 +6,65 @@
 
 lv_ui guider_ui;
 
-PageState_t g_current_page = HOME_PAGE;
-rt_mutex_t g_page_state_mutex = RT_NULL;
-rt_mutex_t g_fresh_mutex = RT_NULL;
+static PageState_t g_current_page = HOME_PAGE;
+
+/* lvgl本身就是个伪多线程，也就是说一个函数不被执行完，是不会被抢占的，所以可以不用互斥锁 */
+static rt_mutex_t g_page_state_mutex = RT_NULL;
+static rt_mutex_t g_fresh_mutex = RT_NULL;
+static lv_timer_t *g_aht10_fresh_timer = RT_NULL;
+static lv_timer_t *g_icm_fresh_timer = RT_NULL;
+static lv_timer_t *g_led_blink_timer = RT_NULL;
 
 extern lv_group_t *keypad_group; // default group
+extern rt_mq_t g_aht10_mq;
+extern rt_mq_t g_icm20608_mq;
+extern rt_sem_t g_led_sem;
+
+static void aht_data_fresh(lv_timer_t *timer)
+{
+    float recvbuf[2] = {0};
+    rt_ssize_t ret = RT_NULL;
+    ret = rt_mq_recv(g_aht10_mq, recvbuf, sizeof(recvbuf), 5);
+    LOG_D("aht10 rt_mq_recv ret : %d", ret);
+    if (g_current_page == HOME_PAGE && ret == sizeof(recvbuf))
+    {
+        rt_mutex_take(g_fresh_mutex, RT_WAITING_FOREVER);
+        lv_label_set_text_fmt(guider_ui.Home_label_temp, "%.2f", recvbuf[0]);
+        lv_label_set_text_fmt(guider_ui.Home_label_humi, "%.2f", recvbuf[1]);
+        rt_mutex_release(g_fresh_mutex);
+    }
+}
+
+static void icm_data_fresh(lv_timer_t *timer)
+{
+    rt_int16_t recvbuf[6] = {0};
+    rt_ssize_t ret = RT_NULL;
+    ret = rt_mq_recv(g_icm20608_mq, recvbuf, sizeof(recvbuf), 5);
+    LOG_D("icm20680 rt_mq_recv ret : %d", ret);
+    if (g_current_page == HOME_PAGE && ret == sizeof(recvbuf))
+    {
+        rt_mutex_take(g_fresh_mutex, RT_WAITING_FOREVER);
+        lv_label_set_text_fmt(guider_ui.Home_label_acc_x, "%5d", recvbuf[0]);
+        lv_label_set_text_fmt(guider_ui.Home_label_acc_y, "%5d", recvbuf[1]);
+        lv_label_set_text_fmt(guider_ui.Home_label_acc_z, "%5d", recvbuf[2]);
+        lv_label_set_text_fmt(guider_ui.Home_label_gyro_x, "%5d", recvbuf[3]);
+        lv_label_set_text_fmt(guider_ui.Home_label_gyro_y, "%5d", recvbuf[4]);
+        lv_label_set_text_fmt(guider_ui.Home_label_gyro_z, "%5d", recvbuf[5]);
+        rt_mutex_release(g_fresh_mutex);
+    }
+}
+
+static void led_blink_fresh(lv_timer_t *timer)
+{
+    rt_err_t ret = RT_NULL;
+    rt_sem_take(g_led_sem, 5);
+    if (g_current_page == HOME_PAGE && ret == RT_NULL)
+    {
+        rt_mutex_take(g_fresh_mutex, RT_WAITING_FOREVER);
+        lv_led_toggle(guider_ui.Home_led_1);
+        rt_mutex_release(g_fresh_mutex);
+    }
+}
 
 /* 逻辑混乱，能否用链表进行三级页面管理或者简化为二级 */
 void handle_key_input(uint32_t act_key)
@@ -139,4 +193,7 @@ void lv_user_gui_init(void)
     custom_init(&guider_ui);    // 自定义
     g_page_state_mutex = rt_mutex_create("page_state", RT_IPC_FLAG_PRIO);
     g_fresh_mutex = rt_mutex_create("data_fresh", RT_IPC_FLAG_PRIO);
+    g_aht10_fresh_timer = lv_timer_create(aht_data_fresh, 1000, RT_NULL);
+    g_icm_fresh_timer = lv_timer_create(icm_data_fresh, 1000, RT_NULL);
+    g_led_blink_timer = lv_timer_create(led_blink_fresh, 500, RT_NULL);
 }

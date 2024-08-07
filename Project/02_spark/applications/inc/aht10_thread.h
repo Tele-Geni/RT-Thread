@@ -8,7 +8,7 @@
 #define ATH10_I2C_BUS "i2c3"
 
 #define AHT10_PRIORITY RT_THREAD_PRIORITY_MAX - 10
-#define AHT10_STACK_SIZE (128 * 12)
+#define AHT10_STACK_SIZE (128 * 8)
 #define AHT10_TIMESLICE 10
 
 void aht10_entry(void *parameter);

@@ -204,7 +204,7 @@ void LCD_BackLightSet(uint8_t value)
         /* 使能设备 */
         rt_pwm_enable(pwm_bl_dev, PWM_BL_CHANNEL);
 
-        LOG_I("backlight %d percent", value);
+        LOG_D("backlight %d percent", value);
     }
     else
     {

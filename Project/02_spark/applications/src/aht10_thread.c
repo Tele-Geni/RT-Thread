@@ -28,17 +28,11 @@ void aht10_entry(void *parameter)
         memset(ath10_buf, 0, sizeof(ath10_buf));
         ath10_buf[0] = aht10_read_temperature(g_dev);
         ath10_buf[1] = aht10_read_humidity(g_dev);
-
         LOG_D("humi: %.2f, temp: %.2f", ath10_buf[0], ath10_buf[1]);
-
         ret = rt_mq_send_wait(g_aht10_mq, ath10_buf, sizeof(ath10_buf), RT_WAITING_FOREVER);
-        if (RT_EOK == ret)
-        {
-            extern lv_ui guider_ui;
-            lv_event_send(guider_ui.Home_label_temp, LV_EVENT_VALUE_CHANGED, RT_NULL);
-            // lv_event_send(guider_ui.Home_label_humi, LV_EVENT_VALUE_CHANGED, RT_NULL);
-        }
-        rt_thread_mdelay(1000);
+        if (ret != RT_EOK)
+            LOG_W("rt_mq_send_wait failed!");
+        rt_thread_mdelay(800); // 队伍满了，生产者可以等，但是不能让消费者等
     }
 }
 

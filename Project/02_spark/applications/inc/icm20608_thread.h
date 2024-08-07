@@ -10,7 +10,7 @@
 #define ICM_DEV_NAME "i2c2"
 
 #define ICM20608_PRIORITY RT_THREAD_PRIORITY_MAX - 10
-#define ICM20608_STACK_SIZE (128 * 12)
+#define ICM20608_STACK_SIZE (128 * 8)
 #define ICM20608_TIMESLICE 10
 
 void icm20608_entry(void *parameter);
