@@ -18,7 +18,7 @@ int can_send(rt_uint8_t *txbuf)
     g_txmsg.rtr = RT_CAN_DTR;
     g_txmsg.len = 8;
 
-    rt_strcpy(g_txmsg.data, txbuf);
+    rt_strncpy(g_txmsg.data, txbuf, sizeof(txbuf));
 
     size = rt_device_write(g_can_dev, 0, &g_txmsg, sizeof(g_txmsg));
     if (size == 0)
