@@ -1323,7 +1323,11 @@ static int8_t keypad_get_key(void)
 }
 ```
 
+### 485设备
 
+如果串口引脚没有进行开启初始化，则会出现以下错误：
+
+![image-20240810132939427](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240810132939427.png)
 
 ## 三、参考内容
 
@@ -1341,3 +1345,8 @@ static int8_t keypad_get_key(void)
 
 [LVGL学习(4)：输入设备的四种类型及物理按键的实现](https://blog.csdn.net/tilblackout/article/details/131097596)
 
+[FreeModbus解析](https://www.cnblogs.com/The-explosion/p/13403108.html)
+
+[FreeModbus超时1](https://club.rt-thread.org/ask/question/64d309936b63dced.html)
+
+[FreeModbus超时2](https://club.rt-thread.org/ask/question/271051722b97df51.html)
