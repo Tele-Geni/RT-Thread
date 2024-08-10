@@ -86,3 +86,4 @@ int can_thread(void)
     return 0;
 }
 MSH_CMD_EXPORT(can_thread, can_thread);
+// INIT_DEVICE_EXPORT(can_thread);

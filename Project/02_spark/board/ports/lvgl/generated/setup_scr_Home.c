@@ -15,10 +15,10 @@
 #include "custom.h"
 #include "lv_dclock.h"
 
-int Home_digital_clock_1_min_value = 25;
-int Home_digital_clock_1_hour_value = 11;
-int Home_digital_clock_1_sec_value = 50;
-char Home_digital_clock_1_meridiem[] = "AM";
+int Home_digital_clock_1_min_value = 00;
+int Home_digital_clock_1_hour_value = 00;
+int Home_digital_clock_1_sec_value = 00;
+char Home_digital_clock_1_meridiem[] = "/S";
 void setup_scr_Home(lv_ui *ui)
 {
 	// Write codes Home
@@ -69,7 +69,7 @@ void setup_scr_Home(lv_ui *ui)
 
 	// Write codes Home_digital_clock_1
 	static bool Home_digital_clock_1_timer_enabled = false;
-	ui->Home_digital_clock_1 = lv_dclock_create(ui->Home, "11:25:50 AM");
+	ui->Home_digital_clock_1 = lv_dclock_create(ui->Home, "00:00:00/S");
 	if (!Home_digital_clock_1_timer_enabled)
 	{
 		lv_timer_create(Home_digital_clock_1_timer, 1000, NULL);

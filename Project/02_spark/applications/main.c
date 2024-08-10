@@ -16,6 +16,6 @@
 
 int main(void)
 {
-    ulog_global_filter_lvl_set(LOG_LVL_DBG);
+    ulog_global_filter_lvl_set(LOG_LVL_INFO);
     return 0;
 }
