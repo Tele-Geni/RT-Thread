@@ -9,11 +9,11 @@ static struct rt_semaphore g_rx_sem;
 static struct rt_can_msg g_rxmsg = {0};
 static struct rt_can_msg g_txmsg = {0};
 
-int can_send(rt_uint8_t *txbuf)
+int can_send(unsigned char id, rt_uint8_t *txbuf)
 {
     rt_ssize_t size = 0;
 
-    g_txmsg.id = 0x7FF; // pc master
+    g_txmsg.id = id; // uint_8
     g_txmsg.ide = RT_CAN_STDID;
     g_txmsg.rtr = RT_CAN_DTR;
     g_txmsg.len = 8;
@@ -68,7 +68,7 @@ void can_entry(void *parameter)
             rt_kprintf("%02x ", g_rxmsg.data[i]);
         }
         rt_kprintf("\n");
-        can_send(g_rxmsg.data);
+        can_send(0x01, g_rxmsg.data);
         rt_thread_mdelay(20);
     }
 }

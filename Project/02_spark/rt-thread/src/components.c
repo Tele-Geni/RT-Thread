@@ -20,13 +20,15 @@
 
 #include <rthw.h>
 #include <rtthread.h>
+#include <ulog.h>
+#include <main.h>
 
 #ifdef RT_USING_USER_MAIN
 #ifndef RT_MAIN_THREAD_STACK_SIZE
-#define RT_MAIN_THREAD_STACK_SIZE     2048
+#define RT_MAIN_THREAD_STACK_SIZE 2048
 #endif /* RT_MAIN_THREAD_STACK_SIZE */
 #ifndef RT_MAIN_THREAD_PRIORITY
-#define RT_MAIN_THREAD_PRIORITY       (RT_THREAD_PRIORITY_MAX / 3)
+#define RT_MAIN_THREAD_PRIORITY (RT_THREAD_PRIORITY_MAX / 3)
 #endif /* RT_MAIN_THREAD_PRIORITY */
 #endif /* RT_USING_USER_MAIN */
 
@@ -88,7 +90,7 @@ void rt_components_board_init(void)
 #ifdef RT_DEBUGING_AUTO_INIT
     int result;
     const struct rt_init_desc *desc;
-    for (desc = &__rt_init_desc_rti_board_start; desc < &__rt_init_desc_rti_board_end; desc ++)
+    for (desc = &__rt_init_desc_rti_board_start; desc < &__rt_init_desc_rti_board_end; desc++)
     {
         rt_kprintf("initialize %s", desc->fn_name);
         result = desc->fn();
@@ -114,7 +116,7 @@ void rt_components_init(void)
     const struct rt_init_desc *desc;
 
     rt_kprintf("do components initialization.\n");
-    for (desc = &__rt_init_desc_rti_board_end; desc < &__rt_init_desc_rti_end; desc ++)
+    for (desc = &__rt_init_desc_rti_board_end; desc < &__rt_init_desc_rti_end; desc++)
     {
         rt_kprintf("initialize %s", desc->fn_name);
         result = desc->fn();
@@ -123,7 +125,7 @@ void rt_components_init(void)
 #else
     volatile const init_fn_t *fn_ptr;
 
-    for (fn_ptr = &__rt_init_rti_board_end; fn_ptr < &__rt_init_rti_end; fn_ptr ++)
+    for (fn_ptr = &__rt_init_rti_board_end; fn_ptr < &__rt_init_rti_end; fn_ptr++)
     {
         (*fn_ptr)();
     }
@@ -166,8 +168,7 @@ int entry(void)
 
 #ifndef RT_USING_HEAP
 /* if there is not enable heap, we should use static thread and stack. */
-rt_align(RT_ALIGN_SIZE)
-static rt_uint8_t main_thread_stack[RT_MAIN_THREAD_STACK_SIZE];
+rt_align(RT_ALIGN_SIZE) static rt_uint8_t main_thread_stack[RT_MAIN_THREAD_STACK_SIZE];
 struct rt_thread main_thread;
 #endif /* RT_USING_HEAP */
 
@@ -246,6 +247,8 @@ int rtthread_startup(void)
      * NOTE: please initialize heap inside board initialization.
      */
     rt_hw_board_init();
+
+    ulog_global_filter_lvl_set(ULOG_FILITER_LEVEL);
 
     /* show RT-Thread version */
     rt_show_version();

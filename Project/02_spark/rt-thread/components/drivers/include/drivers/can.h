@@ -173,7 +173,7 @@ struct can_configure
 
 #define CANDEFAULTCONFIG \
 {\
-        CAN1MBaud,\
+        CAN500kBaud,\
         RT_CANMSG_BOX_SZ,\
         RT_CANSND_BOX_NUM,\
         RT_CAN_MODE_NORMAL,\

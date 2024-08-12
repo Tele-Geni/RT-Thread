@@ -10,7 +10,7 @@
 #define CAN_STACK_SIZE (128 * 8)
 #define CAN_TIMESLICE 10
 
-int can_send(rt_uint8_t *txbuf);
+int can_send(unsigned char id, rt_uint8_t *txbuf);
 void can_entry(void *parameter);
 
 #endif /* __CAN_THREAD_H_ */

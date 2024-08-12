@@ -112,5 +112,5 @@ int modbus_thread(void)
     is_init = 1;
     return RT_EOK;
 }
-MSH_CMD_EXPORT(modbus_thread, modbus_thread);
-// INIT_DEVICE_EXPORT(modbus_thread);
+// MSH_CMD_EXPORT(modbus_thread, modbus_thread);
+INIT_DEVICE_EXPORT(modbus_thread);
