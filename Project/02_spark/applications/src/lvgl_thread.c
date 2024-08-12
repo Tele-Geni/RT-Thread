@@ -176,6 +176,24 @@ void handle_key_input(uint32_t act_key)
             rt_mutex_release(g_page_state_mutex);
             lv_event_send(lv_group_get_focused(keypad_group), LV_EVENT_CLICKED, RT_NULL);
             goto End;
+        case KEY_ADD:
+            focused_obj = lv_group_get_focused(keypad_group);
+            focused_obj_label = lv_obj_get_child(focused_obj, 0);
+            if (focused_obj_label && lv_obj_check_type(focused_obj_label, &lv_label_class))
+                focused_obj_label_text = lv_label_get_text(focused_obj_label);
+            LOG_D("focused_obj_label_text: %s", focused_obj_label_text);
+            rt_mutex_take(g_page_state_mutex, RT_WAITING_FOREVER);
+            if (strncmp(focused_obj_label_text, "速度：", strlen("速度：")) == 0)
+            {
+                LOG_E("");
+                LOG_E("add slider");
+                LOG_E("");
+            }
+            rt_mutex_release(g_page_state_mutex);
+            lv_event_send(lv_group_get_focused(keypad_group), LV_EVENT_CLICKED, RT_NULL);
+            goto End;
+        case KEY_SUB:
+            goto End;
         }
         break;
     default:

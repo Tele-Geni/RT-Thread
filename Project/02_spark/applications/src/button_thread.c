@@ -51,6 +51,9 @@ static void key_left_callback(void *args)
     case FLEX_BTN_PRESS_CLICK:
         g_cur_dummy_key = KEY_LEFT_2;
         break;
+    case FLEX_BTN_PRESS_SHORT_START:
+        g_cur_dummy_key = KEY_SUB; /* short press to sub */
+        break;
     default:
         break;
     }
@@ -64,6 +67,9 @@ static void key_right_callback(void *args)
     {
     case FLEX_BTN_PRESS_CLICK:
         g_cur_dummy_key = KEY_RIGHT_3;
+        break;
+    case FLEX_BTN_PRESS_SHORT_START:
+        g_cur_dummy_key = KEY_ADD; /* short press to add */
         break;
     default:
         break;

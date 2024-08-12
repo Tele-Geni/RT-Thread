@@ -93,6 +93,16 @@ static void keypad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
             act_key = KEY_ESC; /* short press to exit/back */
             handle_key_input(act_key);
             break;
+        case KEY_ADD:
+            LOG_D("recv act_key value :        %d!\n", act_key);
+            act_key = KEY_ADD; /* short press to add */
+            handle_key_input(act_key);
+            break;
+        case KEY_SUB:
+            LOG_D("recv act_key value :        %d!\n", act_key);
+            act_key = KEY_SUB; /* short press to sub */
+            handle_key_input(act_key);
+            break;
         default:
             break;
         }
