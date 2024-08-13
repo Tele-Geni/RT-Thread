@@ -18,18 +18,17 @@
   - RT-Thread 内核基础+线程.pdf
   - RT-Thread IPC.pdf
   - RT-Thread 驱动框架.pdf
-  - 星火1号用户手册_V1.1.0.pdf
   - RT-Thread 软件包与组件.pdf
+  - 星火1号用户手册_V1.1.0.pdf
   - RT-Thread BSP移植思路分享.pdf
+  - ARM Cortex-M3与Cortex-M4权威指南.pdf
   - PR提交流程图.png
+  - CANopen轻松入门（周立功）.pdf
+  - 硬石YS-H7Multi开发手册.pdf
 - Notes
   - 00_RT-Thread 开发环境搭建.md
   - 01_RT-Thread ENV构建剪裁原理.md
-    - ~~02_RT-Thread 内核 多线程+互斥+同步+邮箱+消息队列.md~~
-    - ~~03_RT-Thread 内核 启动流程+任务管理.md~~
-    - ~~04_RT-Thread 内核 IPC.md~~
   - 02-04_RT-Thread 内核.md
-    - ~~05_RT-Thread 设备驱动开发.md~~
   - 05_RT-Thread 设备驱动开发.md
   - 06_RT-Thread 软件包与组件.md
   - 07_RT-Thread 设备驱动如何对接.md
@@ -37,7 +36,7 @@
 - Project
   - 00_spark——Day1-Day4环境搭建、内核基础、IPC、设备驱动学习
   - 01_spark——Day5组件与软件包学习
-  - 02_spark——项目学习：拟采用lvgl+flexible_button+canopen+libmodbus搭建一个伺服电机模式控制及传感器采集显示系统
+  - 02_spark——项目学习：拟采用lvgl+flexible_button+canopen+freemodbus搭建一个伺服电机模式控制及传感器采集显示系统
   - 03_f103-blue-pill——驱动对接学习
   - 04_ev_hc32f460——驱动对接学习
 - Tools
@@ -49,4 +48,9 @@
   - lcd_image
     - Image2Lcd_2.9
       - Img2Lcd.exe
+  - canfestival_ports
+    - manual_en.pdf
+    - Mongo-canfestival-3
+    - python-2.7.10.amd64.msi
+    - wxPython2.8*.exe
 

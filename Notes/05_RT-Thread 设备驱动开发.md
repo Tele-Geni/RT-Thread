@@ -1329,6 +1329,8 @@ static int8_t keypad_get_key(void)
 
 ![image-20240810132939427](https://gitee.com/qq1600845354/picgo_img/raw/main/%E7%AC%94%E8%AE%B0/image-20240810132939427.png)
 
+仿真设备测试通过，实物不知道为什么老是超时错误。
+
 ## 三、参考内容
 
 [RT-Thread 设备驱动官方文档](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/device/device)

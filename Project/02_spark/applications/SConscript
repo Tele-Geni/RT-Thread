@@ -5,8 +5,15 @@ cwd     = GetCurrentDir()
 src_dir = os.path.join(cwd, 'src')
 inc_dir = os.path.join(cwd, 'inc')
 
-CPPPATH = [cwd, inc_dir]
+
+canfestival_src_dir = os.path.join(cwd, 'canfestival')
+canfestival_inc_dir = os.path.join(cwd, 'canfestival')
+
+CPPPATH = [cwd, inc_dir, canfestival_inc_dir]
 src = Glob('*.c') + Glob(os.path.join(src_dir, '*.c'))
+
+
+src += Glob(os.path.join(canfestival_src_dir, '*.c'))
 
 if GetDepend(['PKG_USING_RTDUINO']) and not GetDepend(['RTDUINO_NO_SETUP_LOOP']):
     src += ['arduino_main.cpp']

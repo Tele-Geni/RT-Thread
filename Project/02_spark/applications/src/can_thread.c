@@ -12,13 +12,22 @@ static struct rt_can_msg g_txmsg = {0};
 int can_send(unsigned char id, rt_uint8_t *txbuf)
 {
     rt_ssize_t size = 0;
+    rt_ubase_t count = 0;
+
+    if (!txbuf)
+        LOG_W("can_send buf is null!");
 
     g_txmsg.id = id; // uint_8
     g_txmsg.ide = RT_CAN_STDID;
     g_txmsg.rtr = RT_CAN_DTR;
     g_txmsg.len = 8;
 
-    rt_strncpy(g_txmsg.data, txbuf, sizeof(txbuf));
+    // rt_strncpy(g_txmsg.data, txbuf, sizeof(txbuf));
+    if (sizeof(txbuf) > sizeof(g_txmsg.data))
+        count = sizeof(g_txmsg.data);
+    else
+        count = sizeof(txbuf);
+    rt_memcpy(g_txmsg.data, txbuf, count);
 
     size = rt_device_write(g_can_dev, 0, &g_txmsg, sizeof(g_txmsg));
     if (size == 0)
