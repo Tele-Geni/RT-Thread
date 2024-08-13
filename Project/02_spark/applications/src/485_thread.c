@@ -49,7 +49,10 @@ static eMBMasterReqErrCode read_485rtu_sensor(void *parameter)
         usRegData = 0x01;
         error_code = eMBMasterReqReadHoldingRegister(SLAVE_ADDR, usRegAddr, usRegData, RT_WAITING_FOREVER);
         if (error_code == MB_MRE_NO_ERR)
+        {
             LOG_D("usMRegHoldBuf[SLAVE_ADDR - 1][usRegAddr] read data: %d!", usMRegHoldBuf[SLAVE_ADDR - 1][usRegAddr]); // 如usMRegHoldBuf[2][1]为从机3寄存器1的数据
+            motor_sync_mode((int32_t)(usMRegHoldBuf[SLAVE_ADDR - 1][usRegAddr]));                                       // uint16_t -> int32_t 保持器只能获得正数？？？
+        }
         else
             LOG_W("read_485rtu_sensor failed!");
     }

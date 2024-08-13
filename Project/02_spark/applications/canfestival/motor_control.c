@@ -4,7 +4,9 @@
 #define LOG_LVL LOG_LVL_DBG
 #include <ulog.h>
 
-CO_Data *g_pCO_Data = &nimotion_Data;
+rt_mq_t g_motor_mq = RT_NULL;
+
+static CO_Data *g_pCO_Data = &nimotion_Data;
 static servo_config_state_t servo_conf[4];
 
 /* 若写在config_motor_param函数中则不够灵活，因为pdo map映射相对固定，该部分内容可根据用户需要进行删减配置 */
@@ -15,7 +17,13 @@ static servo_config_state_t servo_conf[4];
 //     // {0x2B, 0x72, 0x60, 0x00, 0xF4, 0x01, 0x00, 0x00}, // 最大转矩：6072,00:1F4=1000/2, 2B
 //     // {0x2B, 0x73, 0x60, 0x00, 0xF4, 0x01, 0x00, 0x00}, // 最大电流：6073,00:1F4=1500/3, 2B
 // };
-#define MOTOR_LIMIT_PARA_SDO_LENGTH (sizeof(motor_limit_para_sdo) / sizeof(motor_limit_para_sdo[0]))
+// #define MOTOR_LIMIT_PARA_SDO_LENGTH (sizeof(motor_limit_para_sdo) / sizeof(motor_limit_para_sdo[0]))
+
+extern int32_t g_motor_pos;
+extern int32_t g_motor_speed;
+extern int32_t g_motor_torque;
+extern rt_sem_t g_control_command_sem;
+extern rt_mutex_t g_control_command_mutex;
 
 extern void EnterMutex(void);
 extern void LeaveMutex(void);
@@ -217,6 +225,9 @@ void motor_control_init(void)
     g_pCO_Data->post_emcy = (post_emcy_t)nimotion_post_emcy;
     canOpen(RT_NULL, g_pCO_Data);
     initTimer();
+
+    g_motor_mq = rt_mq_create("motor_reback", sizeof(rt_int32_t) * 3, 32, RT_IPC_FLAG_PRIO);
+
     StartTimerLoop(&InitNodes); // set soft timer to entry initialisation state, after entry preOperational state
 }
 /*********************************************************** mater init ***********************************************************/
@@ -531,13 +542,36 @@ static void config_motor_param(uint8_t nodeId, struct servo_config_state *conf)
 /*********************************************************** entry function ***********************************************************/
 void motor_control_entry(void *parameter)
 {
+    rt_err_t ret;
     motor_control_init();
     LOG_I("motor_control_init finised!");
     while (1)
     {
         /* user app code */
-        // motor_info();
-        rt_thread_mdelay(1000);
+        int32_t motor_reback[3] = {0};
+        motor_reback[0] = Position_actual_value;
+        motor_reback[1] = Velocity_actual_value;
+        motor_reback[2] = torque_actual_value_6077;
+        ret = rt_mq_send_wait(g_motor_mq, motor_reback, sizeof(motor_reback), 5);
+        if (-RT_ERROR == ret)
+            LOG_E("rt_mq_send_wait failed, send message exceed max length!");
+
+        if (g_control_command_sem != RT_NULL)
+        {
+            ret = rt_sem_take(g_control_command_sem, 5);
+            if (RT_EOK == ret)
+            {
+                rt_mutex_take(g_control_command_mutex, CONTROL_COMMAND_MUTEX_WAIT_TIME);
+                rt_kprintf("g_motor_pos: %d\n", g_motor_pos * 10000);
+                rt_kprintf("g_motor_speed: %d\n", g_motor_speed * 10000);
+                rt_kprintf("g_motor_torque: %d\n", g_motor_torque);
+                Target_position = g_motor_pos * 10000;
+                Target_velocity = g_motor_speed * 10000;
+                torque_actual_value_6077 = g_motor_torque;
+                rt_mutex_release(g_control_command_mutex);
+            }
+        }
+        rt_thread_mdelay(10);
     }
 }
 
@@ -556,7 +590,7 @@ INIT_DEVICE_EXPORT(motor_control_thread);
 /*********************************************************** entry function ***********************************************************/
 
 /*********************************************************** debug cmd ***********************************************************/
-static void motor_info(void)
+static void cmd_motor_info(void)
 {
     rt_kprintf("Controlword 0x%0X\n", (uint16_t)Controlword);
     rt_kprintf("Statusword 0x%0X\n", (int8_t)Statusword);
@@ -565,9 +599,9 @@ static void motor_info(void)
     rt_kprintf("Velocity_actual_value %d\n", (int32_t)Velocity_actual_value);
     rt_kprintf("torque_actual_value %d\n", (int16_t)torque_actual_value_6077);
 }
-MSH_CMD_EXPORT(motor_info, motor_info);
+MSH_CMD_EXPORT(cmd_motor_info, cmd_motor_info);
 
-static void motor_enable(int argc, char *argv[])
+static void cmd_motor_enable(int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -585,17 +619,17 @@ static void motor_enable(int argc, char *argv[])
     SYNC_DELAY;
     Controlword = CONTROL_WORD_ENABLE_OPERATION;
 }
-MSH_CMD_EXPORT(motor_enable, motor_enable);
+MSH_CMD_EXPORT(cmd_motor_enable, cmd_motor_enable);
 
-static void motor_disable(int argc, char *argv[])
+static void cmd_motor_disable(int argc, char *argv[])
 {
     Controlword = CONTROL_WORD_SHUTDOWN;
     SYNC_DELAY;
     Controlword = CONTROL_WORD_DISABLE_VOLTAGE;
 }
-MSH_CMD_EXPORT(motor_disable, motor_disable);
+MSH_CMD_EXPORT(cmd_motor_disable, cmd_motor_disable);
 
-static void motor_position_set(int argc, char *argv[])
+static void cmd_motor_position_set(int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -607,9 +641,9 @@ static void motor_position_set(int argc, char *argv[])
     Target_position = position;
     target_torque_6071 = 10;
 }
-MSH_CMD_EXPORT(motor_position_set, motor_position_set);
+MSH_CMD_EXPORT(cmd_motor_position_set, cmd_motor_position_set);
 
-static void motor_velocity_set(int argc, char *argv[])
+static void cmd_motor_velocity_set(int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -621,9 +655,9 @@ static void motor_velocity_set(int argc, char *argv[])
     Target_velocity = velocity;
     target_torque_6071 = 10;
 }
-MSH_CMD_EXPORT(motor_velocity_set, motor_velocity_set);
+MSH_CMD_EXPORT(cmd_motor_velocity_set, cmd_motor_velocity_set);
 
-static void motor_torque_set(int argc, char *argv[])
+static void cmd_motor_torque_set(int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -635,12 +669,62 @@ static void motor_torque_set(int argc, char *argv[])
     target_torque_6071 = torque;
     max_velocity_6080 = 10; // rpm
 }
-MSH_CMD_EXPORT(motor_torque_set, motor_torque_set);
+MSH_CMD_EXPORT(cmd_motor_torque_set, cmd_motor_torque_set);
 
-static void motor_zero_run(int argc, char *argv[])
+static void cmd_motor_zero_run(int argc, char *argv[])
 {
     rt_kprintf("Position_actual_value: %d\n", Position_actual_value);
     Controlword = CONTROL_WORD_RUNNING_OPERATION;
 }
-MSH_CMD_EXPORT(motor_zero_run, motor_zero_run);
+MSH_CMD_EXPORT(cmd_motor_zero_run, cmd_motor_zero_run);
 /*********************************************************** debug cmd ***********************************************************/
+
+/*********************************************************** external-interfaces ***********************************************************/
+void motor_enable(PageState_t cur_page)
+{
+    switch (cur_page)
+    {
+    case ZERO_MODE_PAGE:
+        Modes_of_operation = CSP_MODE;
+        Target_position = 0;
+        break;
+    case POSITION_MODE_PAGE:
+        Modes_of_operation = CSP_MODE;
+        Target_position = Position_actual_value;
+        break;
+    case SPEED_MODE_PAGE:
+        Modes_of_operation = CSV_MODE;
+        Target_position = Position_actual_value;
+        break;
+    case TORQUE_MODE_PAGE:
+        Modes_of_operation = CST_MODE;
+        Target_position = Position_actual_value;
+        break;
+    case SYNC_MODE_PAGE:
+        Modes_of_operation = CSP_MODE;
+        Target_position = Position_actual_value;
+        break;
+    default:
+        LOG_E("motor_enable recv illegal page status");
+        break;
+    }
+    Target_velocity = 0;
+    target_torque_6071 = 0;
+    Controlword = CONTROL_WORD_SHUTDOWN;
+    SYNC_DELAY;
+    Controlword = CONTROL_WORD_SWITCH_ON;
+    SYNC_DELAY;
+    Controlword = CONTROL_WORD_ENABLE_OPERATION;
+}
+
+void motor_disable(void)
+{
+    Target_position = Position_actual_value;
+    Target_velocity = 0;
+    target_torque_6071 = 0;
+    Controlword = CONTROL_WORD_SHUTDOWN;
+    Modes_of_operation = NO_DEF0;
+    SYNC_DELAY;
+    Controlword = CONTROL_WORD_DISABLE_VOLTAGE;
+}
+/*********************************************************** external-interfaces ***********************************************************/

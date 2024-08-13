@@ -5,6 +5,7 @@
 #include "mb.h"
 #include "mb_m.h"
 #include "user_mb_app.h"
+#include "lvgl_thread.h"
 
 #define SLAVE_ADDR 0x01
 

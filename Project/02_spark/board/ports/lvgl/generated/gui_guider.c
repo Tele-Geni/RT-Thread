@@ -64,18 +64,18 @@ void ui_animation(void * var, int32_t duration, int32_t delay, int32_t start_val
 void init_scr_del_flag(lv_ui *ui)
 {
   
-	ui->Home_del = true;
-	ui->Operation_del = true;
-	ui->ZeroMode_del = true;
-	ui->PositionMode_del = true;
-	ui->SpeedMode_del = true;
-	ui->CurrentMode_del = true;
-	ui->ControlMode_del = true;
+	ui->HOME_PAGE_del = true;
+	ui->OPERATION_PAGE_del = true;
+	ui->ZERO_MODE_PAGE_del = true;
+	ui->POSITION_MODE_PAGE_del = true;
+	ui->SPEED_MODE_PAGE_del = true;
+	ui->TORQUE_MODE_PAGE_del = true;
+	ui->SYNC_MODE_PAGE_del = true;
 }
 
 void setup_ui(lv_ui *ui)
 {
 	init_scr_del_flag(ui);
-	setup_scr_Home(ui);
-	lv_scr_load(ui->Home);
+	setup_scr_HOME_PAGE(ui);
+	lv_scr_load(ui->HOME_PAGE);
 }

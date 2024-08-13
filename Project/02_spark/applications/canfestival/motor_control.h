@@ -21,6 +21,19 @@
 #define PDO_TRANSMISSION_TYPE 1
 #define PRODUCER_HEARTBEAT_TIME 500
 
+#define CONTROL_COMMAND_MUTEX_WAIT_TIME 5000
+
+typedef enum
+{
+    HOME_PAGE = 1,
+    OPERATION_PAGE,
+    ZERO_MODE_PAGE,
+    POSITION_MODE_PAGE,
+    SPEED_MODE_PAGE,
+    TORQUE_MODE_PAGE,
+    SYNC_MODE_PAGE,
+} PageState_t;
+
 typedef enum
 {
     NO_DEF0 = 0,
@@ -34,7 +47,7 @@ typedef enum
     CSP_MODE, /* finish */
     CSV_MODE, /* finish */
     CST_MODE
-} motor_mode_t;
+} MotorMode_t;
 
 typedef struct servo_config_state
 {
@@ -43,6 +56,8 @@ typedef struct servo_config_state
     struct rt_semaphore finish_sem;
 } servo_config_state_t;
 
+void motor_enable(PageState_t cur_page);
+void motor_disable(void);
 void motor_control_entry(void *parameter);
 
 #endif /* __MOTOR_THREAD_H_ */

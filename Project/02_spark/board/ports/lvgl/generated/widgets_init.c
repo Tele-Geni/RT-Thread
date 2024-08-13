@@ -80,16 +80,16 @@ void clock_count(int *hour, int *min, int *sec)
 }
 #endif
 
-extern int Home_digital_clock_1_hour_value;
-extern int Home_digital_clock_1_min_value;
-extern int Home_digital_clock_1_sec_value;
-extern char Home_digital_clock_1_meridiem[];
+extern int HOME_PAGE_digital_clock_1_hour_value;
+extern int HOME_PAGE_digital_clock_1_min_value;
+extern int HOME_PAGE_digital_clock_1_sec_value;
+extern char HOME_PAGE_digital_clock_1_meridiem[];
 
-void Home_digital_clock_1_timer(lv_timer_t *timer)
+void HOME_PAGE_digital_clock_1_timer(lv_timer_t *timer)
 {
-    clock_count_12(&Home_digital_clock_1_hour_value, &Home_digital_clock_1_min_value, &Home_digital_clock_1_sec_value, Home_digital_clock_1_meridiem);
-    if (lv_obj_is_valid(guider_ui.Home_digital_clock_1))
+    clock_count_12(&HOME_PAGE_digital_clock_1_hour_value, &HOME_PAGE_digital_clock_1_min_value, &HOME_PAGE_digital_clock_1_sec_value, HOME_PAGE_digital_clock_1_meridiem);
+    if (lv_obj_is_valid(guider_ui.HOME_PAGE_digital_clock_1))
     {
-        lv_dclock_set_text_fmt(guider_ui.Home_digital_clock_1, "%d:%02d:%02d %s", Home_digital_clock_1_hour_value, Home_digital_clock_1_min_value, Home_digital_clock_1_sec_value, Home_digital_clock_1_meridiem);
+        lv_dclock_set_text_fmt(guider_ui.HOME_PAGE_digital_clock_1, "%d:%02d:%02d %s", HOME_PAGE_digital_clock_1_hour_value, HOME_PAGE_digital_clock_1_min_value, HOME_PAGE_digital_clock_1_sec_value, HOME_PAGE_digital_clock_1_meridiem);
     }
 }
