@@ -33,6 +33,7 @@
   - 06_RT-Thread 软件包与组件.md
   - 07_RT-Thread 设备驱动如何对接.md
   - 08_硬件异常报错分析.md
+  - 09_sdo_pdo_map_transfer_debug.xlsx
 - Project
   - 00_spark——Day1-Day4环境搭建、内核基础、IPC、设备驱动学习
   - 01_spark——Day5组件与软件包学习
@@ -40,17 +41,31 @@
   - 03_f103-blue-pill——驱动对接学习
   - 04_ev_hc32f460——驱动对接学习
 - Tools
-  - can_analyzer
-    - USB_CAN+TOOLSetup(V9.12).exe
-    - USB驱动安装工具Setup(V1.40).exe
   - lcd_font
+    
     - 取字模软件.EXE
+    
   - lcd_image
     - Image2Lcd_2.9
       - Img2Lcd.exe
+    
+  - can_analyzer
+
+    - USB_CAN+TOOLSetup(V9.12).exe
+    - USB驱动安装工具Setup(V1.40).exe
+
+  - modbus_poll_slave
+
+    - ModbusSlaveSetupxxBit.exe
+    - ModbusPollSetupxxBit.exe
+
   - canfestival_ports
-    - manual_en.pdf
+    
+    - canfestival_ports_files
     - Mongo-canfestival-3
+    - canfestival_manual_en.pdf
     - python-2.7.10.amd64.msi
     - wxPython2.8*.exe
+    
+    
 

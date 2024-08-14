@@ -33,9 +33,10 @@ int main(void)
 
 /* 因为WIFI和WQ25相互冲突，所以在板级初始化时进行拉低 */
 #define WIFI_CS GET_PIN(F, 10)
-void WIFI_CS_PULL_DOWN(void)
+int WIFI_CS_PULL_DOWN(void)
 {
     rt_pin_mode(WIFI_CS, PIN_MODE_OUTPUT);
     rt_pin_mode(WIFI_CS, PIN_LOW);
+    return 0;
 }
 INIT_BOARD_EXPORT(WIFI_CS_PULL_DOWN);
